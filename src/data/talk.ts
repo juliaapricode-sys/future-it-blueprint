@@ -6,8 +6,6 @@ export type SlideMeta = {
   notes: string[];
 };
 
-export const TALK_MINUTES = 15;
-
 export const SLIDES: SlideMeta[] = [
   {
     id: "title",
