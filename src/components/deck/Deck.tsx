@@ -72,7 +72,6 @@ export function Deck() {
   const [touchX, setTouchX] = useState<number | null>(null);
 
   const last = SLIDE_VIEWS.length - 1;
-  const meta = SLIDES[index];
   const View = SLIDE_VIEWS[index];
 
   const go = useCallback(
@@ -161,24 +160,13 @@ export function Deck() {
       />
       <div className="deck-noise" />
       <AmbientField />
-      <header className="no-print relative z-10 flex items-center justify-between gap-3 bg-linear-to-b from-black/45 to-transparent px-4 py-3 md:px-8">
-        <div className="flex min-w-0 items-center gap-3">
-          <span className="font-mono text-[10px] tracking-[0.2em] text-cyan uppercase">
-            Холдинг · архитектура
-          </span>
-          <span className="hidden text-white/20 sm:inline">/</span>
-          <span className="hidden truncate font-mono text-[10px] text-muted-foreground sm:inline">
-            {meta.kicker}
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Link
-            href="/script"
-            className="hidden font-mono text-[10px] tracking-wide text-muted-foreground uppercase hover:text-paper sm:inline"
-          >
-            Текст
-          </Link>
-        </div>
+      <header className="no-print relative z-10 flex items-center justify-end gap-3 bg-linear-to-b from-black/45 to-transparent px-4 py-3 md:px-8">
+        <Link
+          href="/script"
+          className="hidden font-mono text-[10px] tracking-wide text-muted-foreground uppercase hover:text-paper sm:inline"
+        >
+          Текст
+        </Link>
       </header>
 
       <div className="relative z-10 mx-4 h-px bg-white/10 md:mx-8">
