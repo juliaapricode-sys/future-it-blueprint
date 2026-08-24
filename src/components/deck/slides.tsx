@@ -431,7 +431,7 @@ export function RequirementsSlide() {
           <p className="font-mono text-[11px] tracking-widest text-violet uppercase">
             Обязательно
           </p>
-          <p className="mt-2 text-lg font-medium text-paper">Право производить</p>
+          <p className="mt-2 text-lg font-medium text-paper">Непрерывное производство</p>
           <ul className="mt-auto space-y-2 pt-6 text-sm text-paper/80">
             <li>Непрерывность технологического процесса</li>
             <li>Сегментация информационного и операционного контуров, критическая информационная инфраструктура</li>
