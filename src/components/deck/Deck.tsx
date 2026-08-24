@@ -1,7 +1,6 @@
 "use client";
 
 import NextImage from "next/image";
-import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import {
   useCallback,
@@ -160,16 +159,7 @@ export function Deck() {
       />
       <div className="deck-noise" />
       <AmbientField />
-      <header className="no-print relative z-10 flex items-center justify-end gap-3 bg-linear-to-b from-black/45 to-transparent px-4 py-3 md:px-8">
-        <Link
-          href="/script"
-          className="hidden font-mono text-[10px] tracking-wide text-muted-foreground uppercase hover:text-paper sm:inline"
-        >
-          Текст
-        </Link>
-      </header>
-
-      <div className="relative z-10 mx-4 h-px bg-white/10 md:mx-8">
+      <div className="relative z-10 mx-4 mt-3 h-px bg-white/10 md:mx-8 md:mt-4">
         <div
           className="h-px bg-linear-to-r from-violet via-cyan to-gold transition-[width] duration-300"
           style={{ width: `${progress}%` }}
