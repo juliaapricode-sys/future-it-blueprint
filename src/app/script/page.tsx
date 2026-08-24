@@ -8,9 +8,9 @@ export const metadata = {
 
 export default function ScriptPage() {
   return (
-    <div className="min-h-dvh bg-background px-4 py-10 md:px-8">
+    <div className="deck-grid min-h-dvh px-4 py-10 md:px-8">
       <article className="mx-auto max-w-2xl">
-        <p className="font-mono text-[11px] tracking-[0.2em] text-copper uppercase">
+        <p className="font-mono text-[11px] tracking-[0.2em] text-cyan uppercase">
           Сценарий на 15 минут · читать вслух
         </p>
         <h1 className="font-heading mt-3 text-3xl leading-tight md:text-4xl">
@@ -32,7 +32,7 @@ export default function ScriptPage() {
         <ol className="mt-12 space-y-10">
           {SCRIPT.map((block, i) => (
             <li key={block.id}>
-              <p className="font-mono text-[11px] text-copper">
+              <p className="font-mono text-[11px] text-cyan">
                 {SLIDES[i]?.number} · {SLIDES[i]?.durationSec} сек · {block.title}
               </p>
               <p className="mt-3 text-[17px] leading-8 text-paper">{block.body}</p>

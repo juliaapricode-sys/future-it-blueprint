@@ -9,18 +9,18 @@ export const metadata = {
 
 export default function HandoutPage() {
   return (
-    <div className="min-h-dvh bg-background px-4 py-10 text-foreground md:px-8">
-      <article className="mx-auto max-w-3xl">
-        <p className="font-mono text-[11px] tracking-[0.2em] text-copper uppercase">
+    <div className="deck-grid min-h-dvh px-4 py-10 text-foreground md:px-8">
+      <article className="relative z-10 mx-auto max-w-3xl">
+        <p className="font-mono text-[11px] tracking-[0.2em] text-cyan uppercase">
           Памятка после доклада · 15 минут
         </p>
         <h1 className="font-heading mt-3 text-3xl leading-tight md:text-4xl">
           Цифровая архитектура промышленного холдинга
         </h1>
         <p className="mt-4 text-muted-foreground">
-          Короткий текст для тех, кто был на докладе — и для тех, кто не успел.
-          Технологический контур не ломаем. Легаси не стыдимся. Меняем швы,
-          правила соединения и операционную модель.
+          Краткое изложение для участников доклада. Технологический контур
+          сохраняется. Меняются правила соединения систем, контур корпоративных
+          данных и роли информационных технологий и бизнес-пользователей.
         </p>
         <div className="mt-6 flex flex-wrap gap-2">
           <Button nativeButton={false} render={<Link href="/" />}>
@@ -36,88 +36,86 @@ export default function HandoutPage() {
         <section className="space-y-8">
           <Card>
             <CardHeader>
-              <CardTitle>Что такое современная архитектура</CardTitle>
+              <CardTitle>Состав архитектуры</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+            <CardContent className="text-sm leading-relaxed text-muted-foreground">
+              Семь доменов: бизнес-способности, приложения, данные, интеграция,
+              платформа, безопасность, операционная модель. Архитектура — правила,
+              по которым системы имеют право соединяться.
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Целевые слои</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm leading-relaxed text-muted-foreground">
+              L0–L2 — технологический контур. L3 — производство (MES и смежные
+              системы). OT DMZ — шлюз операционных технологий. Интеграция (API и
+              события). Corporate Data Warehouse, Data Portal, Data Governance.
+              Корпоративные приложения, холдинговые продукты, каналы. Данные
+              поднимаются. Управляющие воздействия вниз — только через шлюзы.
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Почему данные собирают в одном месте</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2 text-sm leading-relaxed text-muted-foreground">
               <p>
-                Не схема серверов, а семь доменов: бизнес-способности, приложения,
-                данные, интеграция, платформа, безопасность и операционная модель.
-                Архитектура — правила, по которым системы имеют право соединяться.
+                Corporate Data Warehouse — корпоративное хранилище: единые витрины
+                по активу, точке учёта, рынку, финансам, надёжности.
+              </p>
+              <p>
+                Data Portal — портал данных: каталог, семантический слой,
+                самообслуживание без локальных копий.
+              </p>
+              <p>
+                Data Governance — управление данными: владельцы, качество,
+                мастер-данные, происхождение, доступ, в том числе для КИИ.
+              </p>
+              <p>
+                Решение Холдинга пересекает процессы. Единое хранилище — это
+                согласованная копия после шлюза, а не смешение сетей IT и OT.
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Тренды, которые нельзя игнорировать</CardTitle>
+              <CardTitle>Тренды: оценка, а не копирование</CardTitle>
             </CardHeader>
             <CardContent className="text-sm leading-relaxed text-muted-foreground">
-              Сближение IT и OT без смешения сетей. Единое пространство имён
-              производства. Продукты данных. Предиктивный ТОиР. Промышленный ИИ на
-              очищенных потоках. Внутренняя платформа для ДЗО.
-              Импортонезависимость как заменяемость. Отчётность из систем, а не из
-              Excel.
+              IT/OT на уровне данных, Unified Namespace, Lakehouse, Digital Twin,
+              промышленный и генеративный ИИ, Platform Engineering, Zero Trust,
+              Edge. Порядок: гипотеза ценности → ограниченный пилот (отрицательный
+              результат допустим) → решение масштабировать, доработать или
+              прекратить инвестирование.
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Must / Should / Win</CardTitle>
+              <CardTitle>Смещение ролей</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm leading-relaxed text-muted-foreground">
+              Бизнес-пользователь на портале данных и с помощью ИИ формирует MVP —
+              минимально жизнеспособный продукт. Информационные технологии
+              обеспечивают платформу, сложные интеграции, информационную
+              безопасность, режим КИИ и перевод прошедшего проверку MVP в
+              промышленную эксплуатацию.
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>90 дней</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-sm text-muted-foreground">
-              <p>
-                <span className="text-paper">Must.</span> Непрерывность
-                техпроцесса, КИИ, сегментация, восстановление.
-              </p>
-              <p>
-                <span className="text-paper">Should.</span> Единые идентификаторы,
-                изменения за недели, наблюдаемость, меньше lock-in.
-              </p>
-              <p>
-                <span className="text-paper">Win.</span> Единая операционная
-                картина, решения ближе к реальному времени, скорость сервисов,
-                ниже стоимость владения.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Целевая слоистость</CardTitle>
-            </CardHeader>
-            <CardContent className="text-sm leading-relaxed text-muted-foreground">
-              L0–L2 — неприкасаемое ядро станции. L3 — MES, АСУЭ, цеховой ТОиР.
-              OT DMZ — шлюзы, историк, промышленная шина. L4 — ERP, EAM, HR,
-              финансы, ГИС. Выше — холдинговые продукты. Поперёк — данные и ИИ,
-              API, IAM/PAM, SOC с OT. Данные поднимаются. Команды вниз — только
-              через контролируемые шлюзы.
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Этапы и 90 дней</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2 text-sm text-muted-foreground">
-              <p>0. Инвентаризация, совет с вето, мораторий на точка-точка.</p>
-              <p>1–2. Связность и данные. 3. Платформа поставки.</p>
-              <p>4. Домены по ценности. 5. ИИ. 6. Продуктовая модель.</p>
-              <p className="text-paper">
-                Сегодня: совет, карта ландшафта IT+OT, один маяк и один пилотный
-                актив.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Что требуется от сотрудников</CardTitle>
-            </CardHeader>
-            <CardContent className="text-sm leading-relaxed text-muted-foreground">
-              Руководители формулируют способность, а не модуль. Владельцы
-              процессов владеют данными. ИТ работает продуктами и платформой. АСУ
-              ТП — соавторы. ИБ — в конвейере. Каждый соблюдает зоны. Мы не
-              заказываем системы — развиваем способности холдинга.
+              <p>1. Архитектурный совет и мораторий на нерегламентированные интеграции.</p>
+              <p>2. Карта ландшафта IT/OT и данных критичных процессов.</p>
+              <p>3. Пилот хранилища и портала: один домен, один актив.</p>
             </CardContent>
           </Card>
         </section>

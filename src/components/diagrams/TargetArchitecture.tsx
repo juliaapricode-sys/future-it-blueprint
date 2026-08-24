@@ -2,100 +2,139 @@ import { cn } from "@/lib/utils";
 
 const LAYERS = [
   {
-    id: "xp",
-    zone: "IT",
-    label: "Каналы и решения",
-    tone: "teal" as const,
+    id: "ch",
+    zone: "L7",
+    en: "Experience",
+    ru: "Каналы и решения",
+    tone: "cyan" as const,
     items: [
-      "Ситуационный центр холдинга",
-      "Порталы ДЗО и мобильные смены",
-      "Клиентские и рыночные сервисы",
+      "Ситуационный центр",
+      "Порталы ДЗО",
+      "Мобильные рабочие места",
+      "Клиентские сервисы",
     ],
   },
   {
-    id: "products",
-    zone: "IT",
-    label: "Холдинговые продукты · L5",
-    tone: "teal" as const,
-    items: ["Рынок и трейдинг", "Сбыт и тепло", "Сервисы для ДЗО", "Казначейство"],
+    id: "pr",
+    zone: "L6",
+    en: "Business products",
+    ru: "Холдинговые продукты",
+    tone: "cyan" as const,
+    items: ["Рынок и трейдинг", "Сбыт и тепло", "Сервисы ДЗО", "Казначейство"],
   },
   {
-    id: "corp",
-    zone: "IT",
-    label: "Корпоративный контур · L4",
-    tone: "teal" as const,
-    items: ["ERP / финансы", "EAM / ТОиР холдинга", "HR, закупки", "ГИС активов"],
-  },
-  {
-    id: "platform",
-    zone: "CROSS",
-    label: "Поперечный слой платформ",
-    tone: "copper" as const,
+    id: "app",
+    zone: "L5",
+    en: "Applications",
+    ru: "Корпоративные приложения",
+    tone: "cyan" as const,
     items: [
-      "Платформа данных и ИИ",
-      "API · событийная шина",
-      "IAM / PAM для OT",
-      "Наблюдаемость · SOC OT",
+      "ERP — планирование ресурсов",
+      "EAM — управление фондами / ТОиР",
+      "HR, закупки",
+      "ГИС активов",
+    ],
+  },
+  {
+    id: "portal",
+    zone: "DATA",
+    en: "Data Portal",
+    ru: "Портал данных: самообслуживание и витрины",
+    tone: "gold" as const,
+    items: ["Каталог", "Семантический слой", "Сертифицированные наборы", "ИИ-запросы"],
+  },
+  {
+    id: "gov",
+    zone: "DATA",
+    en: "Data Governance",
+    ru: "Управление данными: политики и качество",
+    tone: "gold" as const,
+    items: ["Владельцы", "MDM — мастер-данные", "Lineage — происхождение", "Доступ и КИИ"],
+  },
+  {
+    id: "cdw",
+    zone: "DATA",
+    en: "Corporate Data Warehouse",
+    ru: "Корпоративное хранилище данных",
+    tone: "gold" as const,
+    items: ["Единые витрины", "Актив / точка учёта", "Рынок и финансы", "Надёжность"],
+  },
+  {
+    id: "int",
+    zone: "L4.5",
+    en: "Integration",
+    ru: "Интеграция: API и события",
+    tone: "violet" as const,
+    items: [
+      "API Gateway — шлюз интерфейсов",
+      "Event bus — шина событий",
+      "ETL / ELT",
+      "Каталог API",
     ],
   },
   {
     id: "dmz",
     zone: "ШЛЮЗ",
-    label: "OT DMZ · безопасный подъём данных",
-    tone: "ot" as const,
+    en: "OT DMZ",
+    ru: "Демилитаризованная зона операционных технологий",
+    tone: "violet" as const,
     items: [
-      "Шлюзы и data diode",
+      "Контролируемые шлюзы",
+      "Data diode — однонаправленная передача",
       "Реплика историка",
-      "UNS / OPC UA",
-      "Каталог OT-тегов",
+      "OPC UA",
     ],
   },
   {
     id: "l3",
-    zone: "OT",
-    label: "Производство · L3",
-    tone: "ot" as const,
-    items: ["MES", "АСУЭ / ОИК", "Цеховой ТОиР", "Качество · LIMS"],
+    zone: "L3",
+    en: "Manufacturing",
+    ru: "Производственный контур",
+    tone: "violet" as const,
+    items: ["MES — управление производством", "АСУЭ / ОИК", "Цеховой ТОиР", "LIMS — качество"],
   },
   {
     id: "core",
-    zone: "ЯДРО",
-    label: "Технологический контур · L0–L2",
-    tone: "ot" as const,
-    items: ["Поле · ПЛК · РЗА", "ПТК / DCS", "SCADA / HMI", "Изменения — по РТН"],
+    zone: "L0–L2",
+    en: "Operations core",
+    ru: "Технологический контур. Изменения — по промышленному регламенту",
+    tone: "violet" as const,
+    items: ["Поле · ПЛК · РЗА", "DCS / ПТК", "SCADA / HMI", "Ростехнадзор"],
   },
 ];
 
 const toneClass: Record<(typeof LAYERS)[number]["tone"], string> = {
-  teal: "border-teal/35 bg-teal/8",
-  copper: "border-copper/40 bg-copper/10",
-  ot: "border-ot/40 bg-ot/10",
+  cyan: "border-cyan/35 glow-cyan",
+  gold: "border-gold/40 glow-gold",
+  violet: "border-violet/40 glow-violet",
 };
 
-export function TargetArchitecture() {
+export function ArchitectureStack() {
   return (
-    <div className="flex min-h-0 flex-1 flex-col gap-1.5">
-      {LAYERS.map((layer) => (
+    <div className="flex min-h-0 flex-1 flex-col gap-1">
+      {LAYERS.map((layer, i) => (
         <div
           key={layer.id}
           className={cn(
-            "grid grid-cols-[4.5rem_1fr] items-stretch gap-2 rounded-lg border px-2.5 py-1.5 sm:grid-cols-[5.5rem_minmax(0,11rem)_1fr] sm:gap-3 sm:px-3 sm:py-2",
+            "glass grid grid-cols-[3.6rem_1fr] items-center gap-2 rounded-xl px-2.5 py-1 sm:grid-cols-[4.4rem_minmax(0,13.5rem)_1fr] sm:gap-3 sm:px-3 sm:py-1.5",
             toneClass[layer.tone]
           )}
+          style={{ animationDelay: `${i * 40}ms` }}
         >
-          <div className="flex items-center">
-            <span className="font-mono text-[9px] font-medium tracking-[0.14em] text-paper/80 uppercase sm:text-[10px]">
-              {layer.zone}
-            </span>
+          <span className="font-mono text-[9px] tracking-[0.12em] text-paper/75 uppercase sm:text-[10px]">
+            {layer.zone}
+          </span>
+          <div className="hidden min-w-0 sm:block">
+            <p className="text-[11px] leading-tight font-medium text-paper md:text-xs">
+              {layer.en}
+            </p>
+            <p className="text-[10px] leading-tight text-muted-foreground">{layer.ru}</p>
           </div>
-          <p className="hidden items-center text-[11px] leading-tight font-medium text-paper sm:flex md:text-xs">
-            {layer.label}
-          </p>
-          <ul className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[11px] text-paper/90 sm:text-xs md:text-[13px]">
-            <li className="font-medium text-paper sm:hidden">{layer.label}:</li>
+          <ul className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 text-[10px] text-paper/90 sm:text-[11px] md:text-xs">
+            <li className="font-medium text-cyan sm:hidden">{layer.en}:</li>
             {layer.items.map((item) => (
               <li key={item} className="flex items-center gap-1.5">
-                <span className="size-1 shrink-0 rounded-full bg-current opacity-50" />
+                <span className="size-1 shrink-0 rounded-full bg-cyan/80" />
                 {item}
               </li>
             ))}
@@ -103,8 +142,8 @@ export function TargetArchitecture() {
         </div>
       ))}
       <p className="pt-1 font-mono text-[10px] tracking-wide text-muted-foreground uppercase md:text-[11px]">
-        Правило потока: данные — вверх. Команды вниз — только через
-        контролируемые шлюзы.
+        Поток: данные — вверх. Управляющие воздействия вниз — только через шлюзы.
+        Поперечно: IAM, SOC, наблюдаемость, платформа.
       </p>
     </div>
   );

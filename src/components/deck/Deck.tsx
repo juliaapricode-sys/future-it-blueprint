@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { AnimatePresence, motion } from "motion/react";
 import {
   useCallback,
   useEffect,
@@ -8,14 +9,14 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import { Button } from "@/components/ui/button";
+import { AmbientField } from "@/components/deck/AmbientField";
 import {
   AgendaSlide,
+  DataSlide,
   DomainsSlide,
   Next90Slide,
   PeopleSlide,
   PrepareSlide,
-  PrinciplesSlide,
   RealitySlide,
   RequirementsSlide,
   RoadmapSlide,
@@ -24,6 +25,7 @@ import {
   TrendsSlide,
   WhySlide,
 } from "@/components/deck/slides";
+import { Button } from "@/components/ui/button";
 import { SLIDES, TALK_MINUTES } from "@/data/talk";
 import { cn } from "@/lib/utils";
 
@@ -33,13 +35,13 @@ const SLIDE_VIEWS = [
   WhySlide,
   RealitySlide,
   DomainsSlide,
+  TargetSlide,
+  DataSlide,
   TrendsSlide,
   RequirementsSlide,
-  TargetSlide,
-  PrinciplesSlide,
+  PeopleSlide,
   RoadmapSlide,
   PrepareSlide,
-  PeopleSlide,
   Next90Slide,
 ] as const;
 
@@ -170,9 +172,10 @@ export function Deck() {
   return (
     <div className="deck-grid relative flex min-h-dvh flex-col">
       <div className="deck-noise" />
+      <AmbientField />
       <header className="no-print relative z-10 flex items-center justify-between gap-3 px-4 py-3 md:px-8">
         <div className="flex min-w-0 items-center gap-3">
-          <span className="font-mono text-[10px] tracking-[0.2em] text-copper uppercase">
+          <span className="font-mono text-[10px] tracking-[0.2em] text-cyan uppercase">
             Холдинг · архитектура
           </span>
           <span className="hidden text-white/20 sm:inline">/</span>
@@ -209,8 +212,8 @@ export function Deck() {
               remaining < 0
                 ? "text-destructive"
                 : remaining < 120
-                  ? "text-ot"
-                  : "text-teal"
+                  ? "text-gold"
+                  : "text-cyan"
             )}
             aria-label="Таймер доклада"
           >
@@ -221,13 +224,13 @@ export function Deck() {
 
       <div className="relative z-10 mx-4 h-px bg-white/10 md:mx-8">
         <div
-          className="h-px bg-linear-to-r from-copper to-teal transition-[width] duration-300"
+          className="h-px bg-linear-to-r from-violet via-cyan to-gold transition-[width] duration-300"
           style={{ width: `${progress}%` }}
         />
       </div>
 
       <main
-        className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-1 flex-col px-4 py-4 md:px-8 md:py-6"
+        className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col px-4 py-4 md:px-8 md:py-6"
         onTouchStart={(e) => setTouchX(e.changedTouches[0]?.clientX ?? null)}
         onTouchEnd={(e) => {
           if (touchX == null) return;
@@ -246,28 +249,37 @@ export function Deck() {
                   type="button"
                   onClick={() => go(i)}
                   className={cn(
-                    "h-full w-full rounded-xl border p-4 text-left transition-colors",
+                    "glass h-full w-full rounded-xl p-4 text-left transition-colors",
                     i === index
-                      ? "border-copper/50 bg-copper/10"
-                      : "border-white/10 bg-white/[0.03] hover:border-white/20"
+                      ? "border-cyan/50 glow-cyan"
+                      : "hover:border-cyan/30"
                   )}
                 >
-                  <p className="font-mono text-[10px] text-copper">{slide.number}</p>
+                  <p className="font-mono text-[10px] text-gold">{slide.number}</p>
                   <p className="mt-2 text-sm font-medium text-paper">{slide.kicker}</p>
                 </button>
               </li>
             ))}
           </ol>
         ) : (
-          <div className="flex min-h-0 flex-1 flex-col">
-            <View />
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={index}
+              className="flex min-h-0 flex-1 flex-col"
+              initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -10, filter: "blur(6px)" }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <View />
+            </motion.div>
+          </AnimatePresence>
         )}
       </main>
 
-      {notes && !overview ? (
-        <aside className="relative z-10 mx-4 mb-3 rounded-xl border border-copper/25 bg-black/40 p-3 backdrop-blur-md md:mx-8 md:p-4">
-          <p className="font-mono text-[10px] tracking-widest text-copper uppercase">
+      {notes && !overview && meta ? (
+        <aside className="glass relative z-10 mx-4 mb-3 rounded-xl border-cyan/20 p-3 md:mx-8 md:p-4">
+          <p className="font-mono text-[10px] tracking-widest text-cyan uppercase">
             Заметки докладчика · {Math.round(meta.durationSec / 60)} мин
           </p>
           <ul className="mt-2 space-y-1 text-sm text-paper/90">
@@ -296,7 +308,7 @@ export function Deck() {
             }}
             disabled={index === last}
           >
-            Дальше
+            Далее
           </Button>
         </div>
         <p className="font-mono text-[11px] text-muted-foreground">
@@ -309,11 +321,11 @@ export function Deck() {
 
       {help ? (
         <div
-          className="fixed inset-0 z-40 flex items-end justify-center bg-black/60 p-4 md:items-center"
+          className="fixed inset-0 z-40 flex items-end justify-center bg-black/70 p-4 md:items-center"
           onClick={() => setHelp(false)}
         >
           <div
-            className="w-full max-w-md rounded-2xl border border-white/10 bg-[#121820] p-5"
+            className="glass w-full max-w-md rounded-2xl p-5"
             onClick={(e) => e.stopPropagation()}
           >
             <p className="font-heading text-lg text-paper">Управление</p>
