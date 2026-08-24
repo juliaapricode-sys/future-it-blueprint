@@ -3,103 +3,124 @@ import { cn } from "@/lib/utils";
 const LAYERS = [
   {
     id: "ch",
-    zone: "L7",
-    en: "Experience",
-    ru: "Каналы и решения",
+    zone: "Каналы",
+    name: "Каналы и решения",
     tone: "cyan" as const,
     items: [
       "Ситуационный центр",
-      "Порталы ДЗО",
+      "Порталы компаний",
       "Мобильные рабочие места",
       "Клиентские сервисы",
     ],
   },
   {
+    id: "ai",
+    zone: "ИИ",
+    name: "Портал искусственного интеллекта",
+    tone: "gold" as const,
+    items: [
+      "Маркетплейс сервисов искусственного интеллекта",
+      "Протокол контекста модели — подключение моделей к данным и инструментам",
+      "Программные интерфейсы приложений",
+    ],
+  },
+  {
     id: "pr",
-    zone: "L6",
-    en: "Business products",
-    ru: "Холдинговые продукты",
+    zone: "Продукты",
+    name: "Холдинговые продукты",
     tone: "cyan" as const,
-    items: ["Рынок и трейдинг", "Сбыт и тепло", "Сервисы ДЗО", "Казначейство"],
+    items: ["Сети", "Сбыт и теплоснабжение", "Сервисы компаний", "Казначейство"],
   },
   {
     id: "app",
-    zone: "L5",
-    en: "Applications",
-    ru: "Корпоративные приложения",
+    zone: "Приложения",
+    name: "Корпоративные приложения",
     tone: "cyan" as const,
     items: [
-      "ERP — планирование ресурсов",
-      "EAM — управление фондами / ТОиР",
-      "HR, закупки",
-      "ГИС активов",
+      "Планирование ресурсов предприятия",
+      "Управление основными фондами и техническое обслуживание",
+      "Кадры и закупки",
+      "Геоинформационная система активов",
     ],
   },
   {
     id: "portal",
-    zone: "DATA",
-    en: "Data Portal",
-    ru: "Портал данных: самообслуживание и витрины",
+    zone: "Данные",
+    name: "Портал данных",
     tone: "gold" as const,
-    items: ["Каталог", "Семантический слой", "Сертифицированные наборы", "ИИ-запросы"],
+    items: [
+      "Каталог",
+      "Семантический слой",
+      "Сертифицированные наборы",
+      "Запросы с применением искусственного интеллекта",
+    ],
   },
   {
     id: "gov",
-    zone: "DATA",
-    en: "Data Governance",
-    ru: "Управление данными: политики и качество",
+    zone: "Данные",
+    name: "Управление данными",
     tone: "gold" as const,
-    items: ["Владельцы", "MDM — мастер-данные", "Lineage — происхождение", "Доступ и КИИ"],
+    items: [
+      "Владельцы",
+      "Мастер-данные",
+      "Происхождение данных",
+      "Доступ, в том числе для критической информационной инфраструктуры",
+    ],
   },
   {
     id: "cdw",
-    zone: "DATA",
-    en: "Corporate Data Warehouse",
-    ru: "Корпоративное хранилище данных",
+    zone: "Данные",
+    name: "Корпоративное хранилище данных",
     tone: "gold" as const,
-    items: ["Единые витрины", "Актив / точка учёта", "Рынок и финансы", "Надёжность"],
+    items: ["Единые витрины", "Актив и точка учёта", "Сети и финансы", "Надёжность"],
   },
   {
     id: "int",
-    zone: "L4.5",
-    en: "Integration",
-    ru: "Интеграция: API и события",
+    zone: "Связь",
+    name: "Интеграция",
     tone: "violet" as const,
     items: [
-      "API Gateway — шлюз интерфейсов",
-      "Event bus — шина событий",
-      "ETL / ELT",
-      "Каталог API",
+      "Шлюз программных интерфейсов",
+      "Шина событий",
+      "Загрузка и преобразование данных",
+      "Каталог интерфейсов",
     ],
   },
   {
     id: "dmz",
-    zone: "ШЛЮЗ",
-    en: "OT DMZ",
-    ru: "Демилитаризованная зона операционных технологий",
+    zone: "Шлюз",
+    name: "Буферная зона операционных технологий",
     tone: "violet" as const,
     items: [
       "Контролируемые шлюзы",
-      "Data diode — однонаправленная передача",
-      "Реплика историка",
-      "OPC UA",
+      "Однонаправленная передача",
+      "Копия архива технологических параметров",
+      "Промышленный стандарт обмена данными",
     ],
   },
   {
     id: "l3",
-    zone: "L3",
-    en: "Manufacturing",
-    ru: "Производственный контур",
+    zone: "Производство",
+    name: "Производственный контур",
     tone: "violet" as const,
-    items: ["MES — управление производством", "АСУЭ / ОИК", "Цеховой ТОиР", "LIMS — качество"],
+    items: [
+      "Система управления производством",
+      "Учёт энергоресурсов и оперативная информация",
+      "Цеховое техническое обслуживание",
+      "Лабораторные и качественные данные",
+    ],
   },
   {
     id: "core",
-    zone: "L0–L2",
-    en: "Operations core",
-    ru: "Технологический контур. Изменения — по промышленному регламенту",
+    zone: "Ядро",
+    name: "Технологический контур",
     tone: "violet" as const,
-    items: ["Поле · ПЛК · РЗА", "DCS / ПТК", "SCADA / HMI", "Ростехнадзор"],
+    items: [
+      "Поле, контроллеры, релейная защита",
+      "Распределённое управление",
+      "Диспетчерское управление и человеко-машинный интерфейс",
+      "Изменения — по промышленному регламенту",
+    ],
   },
 ];
 
@@ -112,26 +133,22 @@ const toneClass: Record<(typeof LAYERS)[number]["tone"], string> = {
 export function ArchitectureStack() {
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-1">
-      {LAYERS.map((layer, i) => (
+      {LAYERS.map((layer) => (
         <div
           key={layer.id}
           className={cn(
-            "glass grid grid-cols-[3.6rem_1fr] items-center gap-2 rounded-xl px-2.5 py-1 sm:grid-cols-[4.4rem_minmax(0,13.5rem)_1fr] sm:gap-3 sm:px-3 sm:py-1.5",
+            "glass grid grid-cols-[4.8rem_1fr] items-center gap-2 rounded-xl px-2 py-1 sm:grid-cols-[5.6rem_minmax(0,14.5rem)_1fr] sm:gap-3 sm:px-3 sm:py-[5px]",
             toneClass[layer.tone]
           )}
-          style={{ animationDelay: `${i * 40}ms` }}
         >
-          <span className="font-mono text-[9px] tracking-[0.12em] text-paper/75 uppercase sm:text-[10px]">
+          <span className="font-mono text-[9px] leading-tight tracking-[0.08em] text-paper/75 uppercase sm:text-[10px]">
             {layer.zone}
           </span>
-          <div className="hidden min-w-0 sm:block">
-            <p className="text-[11px] leading-tight font-medium text-paper md:text-xs">
-              {layer.en}
-            </p>
-            <p className="text-[10px] leading-tight text-muted-foreground">{layer.ru}</p>
-          </div>
+          <p className="hidden min-w-0 text-[11px] leading-tight font-medium text-paper sm:block md:text-xs">
+            {layer.name}
+          </p>
           <ul className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 text-[10px] text-paper/90 sm:text-[11px] md:text-xs">
-            <li className="font-medium text-cyan sm:hidden">{layer.en}:</li>
+            <li className="font-medium text-cyan sm:hidden">{layer.name}:</li>
             {layer.items.map((item) => (
               <li key={item} className="flex items-center gap-1.5">
                 <span className="size-1 shrink-0 rounded-full bg-cyan/80" />
@@ -143,7 +160,7 @@ export function ArchitectureStack() {
       ))}
       <p className="pt-1 font-mono text-[10px] tracking-wide text-muted-foreground uppercase md:text-[11px]">
         Поток: данные — вверх. Управляющие воздействия вниз — только через шлюзы.
-        Поперечно: IAM, SOC, наблюдаемость, платформа.
+        Поперечно: идентификация, мониторинг информационной безопасности, наблюдаемость, платформа.
       </p>
     </div>
   );
