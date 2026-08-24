@@ -132,33 +132,40 @@ const toneClass: Record<(typeof LAYERS)[number]["tone"], string> = {
 
 export function ArchitectureStack() {
   return (
-    <div className="flex min-h-0 flex-1 flex-col gap-1">
-      {LAYERS.map((layer) => (
-        <div
-          key={layer.id}
-          className={cn(
-            "glass grid grid-cols-[4.8rem_1fr] items-center gap-2 rounded-xl px-2 py-1 sm:grid-cols-[5.6rem_minmax(0,14.5rem)_1fr] sm:gap-3 sm:px-3 sm:py-[5px]",
-            toneClass[layer.tone]
-          )}
-        >
-          <span className="font-mono text-[9px] leading-tight tracking-[0.08em] text-paper/75 uppercase sm:text-[10px]">
-            {layer.zone}
-          </span>
-          <p className="hidden min-w-0 text-[11px] leading-tight font-medium text-paper sm:block md:text-xs">
-            {layer.name}
-          </p>
-          <ul className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 text-[10px] text-paper/90 sm:text-[11px] md:text-xs">
-            <li className="font-medium text-cyan sm:hidden">{layer.name}:</li>
-            {layer.items.map((item) => (
-              <li key={item} className="flex items-center gap-1.5">
-                <span className="size-1 shrink-0 rounded-full bg-cyan/80" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-      <p className="pt-1 font-mono text-[10px] tracking-wide text-muted-foreground uppercase md:text-[11px]">
+    <div className="arch-tower flex min-h-0 flex-1 flex-col justify-end gap-[3px]">
+      {LAYERS.map((layer, i) => {
+        const inset = (LAYERS.length - 1 - i) * 6;
+        return (
+          <div
+            key={layer.id}
+            className={cn(
+              "glass-deep arch-layer grid grid-cols-[4.8rem_1fr] items-center gap-2 rounded-xl px-2 py-1 sm:grid-cols-[5.6rem_minmax(0,14.5rem)_1fr] sm:gap-3 sm:px-3 sm:py-[5px]",
+              toneClass[layer.tone]
+            )}
+            style={{
+              ["--inset" as string]: `${inset}px`,
+              zIndex: LAYERS.length - i,
+            }}
+          >
+            <span className="font-mono text-[9px] leading-tight tracking-[0.08em] text-paper/80 uppercase sm:text-[10px]">
+              {layer.zone}
+            </span>
+            <p className="hidden min-w-0 text-[11px] leading-tight font-medium text-paper sm:block md:text-xs">
+              {layer.name}
+            </p>
+            <ul className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 text-[10px] text-paper/90 sm:text-[11px] md:text-xs">
+              <li className="font-medium text-cyan sm:hidden">{layer.name}:</li>
+              {layer.items.map((item) => (
+                <li key={item} className="flex items-center gap-1.5">
+                  <span className="size-1 shrink-0 rounded-full bg-cyan/80" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+      <p className="pt-2 font-mono text-[10px] tracking-wide text-paper/60 uppercase md:text-[11px]">
         Поток: данные — вверх. Управляющие воздействия вниз — только через шлюзы.
         Поперечно: идентификация, мониторинг информационной безопасности, наблюдаемость, платформа.
       </p>

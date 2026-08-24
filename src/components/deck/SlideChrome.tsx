@@ -10,7 +10,7 @@ export function SlideShell({
   return (
     <div
       className={cn(
-        "flex h-full min-h-0 flex-col justify-center gap-5 md:gap-7",
+        "relative z-10 flex h-full min-h-0 flex-col justify-center gap-5 md:gap-6",
         className
       )}
     >

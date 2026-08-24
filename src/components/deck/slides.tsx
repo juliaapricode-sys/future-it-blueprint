@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { ScenePanel } from "@/components/deck/ScenePanel";
 import {
   Kicker,
   SlideShell,
@@ -7,25 +9,28 @@ import {
 import { DataConstellation } from "@/components/diagrams/DataConstellation";
 import { ArchitectureStack } from "@/components/diagrams/TargetArchitecture";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 export function TitleSlide() {
   return (
-    <SlideShell className="justify-end pb-4 md:justify-center md:pb-0">
-      <div className="busbar w-28 md:w-40" />
-      <Kicker>Промышленный энергетический холдинг · внутренний доклад</Kicker>
-      <h1 className="font-heading max-w-[16ch] text-[2rem] leading-[1.08] font-medium tracking-tight text-paper sm:text-5xl md:text-6xl lg:text-[3.9rem]">
-        Цифровая архитектура современного холдинга
-      </h1>
-      <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-        Целевое устройство информационных и операционных контуров: непрерывность
-        технологического процесса и скорость обоснованного решения на
-        достоверных данных.
-      </p>
-      <div className="flex flex-wrap gap-2 pt-1">
-        <Badge variant="secondary">15 минут</Badge>
-        <Badge variant="outline">Информационные и операционные технологии</Badge>
-        <Badge variant="outline">Хранилище · портал · управление данными</Badge>
-        <Badge variant="outline">Критическая информационная инфраструктура</Badge>
+    <SlideShell className="justify-end pb-2 md:justify-end md:pb-6">
+      <div className="max-w-3xl">
+        <div className="busbar mb-5 w-32 md:w-48" />
+        <Kicker>Промышленный энергетический холдинг · внутренний доклад</Kicker>
+        <h1 className="font-heading mt-3 max-w-[16ch] text-[2.15rem] leading-[1.05] font-medium tracking-tight text-paper text-glow sm:text-5xl md:text-6xl lg:text-[4.15rem]">
+          Цифровая архитектура современного холдинга
+        </h1>
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-paper/85 md:text-lg">
+          Целевое устройство информационных и операционных контуров: непрерывность
+          технологического процесса и скорость обоснованного решения на
+          достоверных данных.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2">
+          <Badge variant="secondary">15 минут</Badge>
+          <Badge variant="outline">Информационные и операционные технологии</Badge>
+          <Badge variant="outline">Хранилище · портал · управление данными</Badge>
+          <Badge variant="outline">Критическая информационная инфраструктура</Badge>
+        </div>
       </div>
     </SlideShell>
   );
@@ -42,15 +47,20 @@ const AGENDA = [
 
 export function AgendaSlide() {
   return (
-    <SlideShell>
-      <Kicker>Повестка</Kicker>
-      <SlideTitle>Шесть блоков. Без деклараций о «цифровизации»</SlideTitle>
-      <ol className="grid gap-2 md:grid-cols-2 md:gap-3">
-        {AGENDA.map((item) => (
-          <li key={item.t}>
-            <Tile className="flex items-start gap-3">
-              <span className="font-mono text-sm text-gold">{item.t}</span>
-              <div className="min-w-0">
+    <SlideShell className="gap-4 md:gap-5">
+      <div>
+        <Kicker>Повестка</Kicker>
+        <SlideTitle>Шесть блоков. Без деклараций о «цифровизации»</SlideTitle>
+      </div>
+      <div className="grid min-h-0 flex-1 gap-4 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+        <ol className="relative flex flex-col justify-center gap-0 pl-2">
+          <span className="agenda-rail absolute top-3 bottom-3 left-[1.15rem] md:left-[1.35rem]" />
+          {AGENDA.map((item) => (
+            <li key={item.t} className="relative flex items-start gap-4 py-2.5 md:py-3">
+              <span className="agenda-node relative z-10 mt-0.5 flex size-8 shrink-0 items-center justify-center font-mono text-[11px] text-gold md:size-9 md:text-xs">
+                {item.t}
+              </span>
+              <div className="min-w-0 pt-0.5">
                 <p className="text-sm leading-snug font-medium text-paper md:text-base">
                   {item.label}
                 </p>
@@ -58,42 +68,50 @@ export function AgendaSlide() {
                   {item.min}
                 </p>
               </div>
-            </Tile>
-          </li>
-        ))}
-      </ol>
+            </li>
+          ))}
+        </ol>
+        <ScenePanel
+          src="/visuals/vis-mesh.webp"
+          alt="Сеть площадок Холдинга как единый цифровой контур"
+          caption="Холдинг как связанный контур, а не набор изолированных систем"
+          className="min-h-[220px] lg:min-h-0"
+        />
+      </div>
     </SlideShell>
   );
 }
 
 export function WhySlide() {
   return (
-    <SlideShell>
-      <Kicker>Конкурентное положение</Kicker>
-      <SlideTitle>Архитектура определяет, видит ли Холдинг факт вовремя</SlideTitle>
-      <div className="grid gap-3 md:grid-cols-2">
-        <Tile>
+    <SlideShell className="gap-4">
+      <div className="max-w-3xl">
+        <Kicker>Конкурентное положение</Kicker>
+        <SlideTitle>Архитектура определяет, видит ли Холдинг факт вовремя</SlideTitle>
+      </div>
+      <div className="grid min-h-0 flex-1 gap-4 lg:grid-cols-2">
+        <article className="glass-deep hud-corners flex flex-col justify-between rounded-3xl p-5 md:p-6">
           <p className="font-mono text-[11px] tracking-widest text-muted-foreground uppercase">
             Сохраняется
           </p>
-          <ul className="mt-3 space-y-2 text-sm text-paper/90 md:text-[15px]">
+          <ul className="mt-6 space-y-3 text-sm text-paper/90 md:text-[15px]">
             <li>Установленная мощность и структура активов</li>
             <li>Топливный баланс, коэффициент полезного действия, тариф, капитальное строительство</li>
             <li>Дисциплина эксплуатации и промышленная безопасность</li>
           </ul>
-        </Tile>
-        <Tile className="border-gold/40 glow-gold">
+        </article>
+        <article className="glass-deep hud-corners glow-gold flex flex-col justify-between rounded-3xl border-gold/45 p-5 md:p-6">
           <p className="font-mono text-[11px] tracking-widest text-gold uppercase">
             Второй контур конкуренции
           </p>
-          <ul className="mt-3 space-y-2 text-sm text-paper md:text-[15px]">
+          <ul className="mt-6 space-y-3 text-sm text-paper md:text-[15px]">
             <li>Готовность блока и дефект — до отказа оборудования</li>
             <li>Небаланс на оптовом рынке электроэнергии, касса компаний, воздействие на программно-технический комплекс</li>
             <li>Новый сервис для сбыта или компаний — в сроки недель, не лет</li>
           </ul>
-        </Tile>
+        </article>
       </div>
-      <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground md:text-[15px]">
+      <p className="max-w-3xl text-sm leading-relaxed text-paper/80 md:text-[15px]">
         Архитектура — система правил соединения систем и данных. Она либо даёт
         единую операционную картину, либо закрепляет изолированные контуры учёта.
       </p>
@@ -101,38 +119,59 @@ export function WhySlide() {
   );
 }
 
+const LANDSCAPE = [
+  {
+    h: "Разнородный корпоративный ландшафт",
+    p: "Компании Холдинга, несколько поколений корпоративных и отраслевых комплексов. Один актив — несколько наименований.",
+  },
+  {
+    h: "Контур станции, длительный жизненный цикл",
+    p: "Системы диспетчерского управления и сбора данных; распределённые системы управления; программно-технические комплексы; релейная защита; коммерческий учёт электроэнергии; оперативная информация; архивы технологических параметров.",
+  },
+  {
+    h: "Разрывы как «интеграция»",
+    p: "Файлы, электронная почта, электронные таблицы в роли шины. Локальные копии данных вне контролируемого периметра.",
+  },
+  {
+    h: "Нормативные ограничения",
+    p: "Критическая информационная инфраструктура, Федеральный закон № 187-ФЗ, требования ФСТЭК России и Ростехнадзора, технологическая независимость — условия проектирования.",
+  },
+];
+
 export function RealitySlide() {
   return (
-    <SlideShell>
-      <Kicker>Исходные условия</Kicker>
-      <SlideTitle>Технологический контур задаёт рамку. Унаследованное — разрывы обмена</SlideTitle>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          {
-            h: "Разнородный корпоративный ландшафт",
-            p: "Компании Холдинга, несколько поколений корпоративных и отраслевых комплексов. Один актив — несколько наименований.",
-          },
-          {
-            h: "Контур станции, длительный жизненный цикл",
-            p: "Системы диспетчерского управления и сбора данных; распределённые системы управления; программно-технические комплексы; релейная защита; коммерческий учёт электроэнергии; оперативная информация; архивы технологических параметров.",
-          },
-          {
-            h: "Разрывы как «интеграция»",
-            p: "Файлы, электронная почта, электронные таблицы в роли шины. Локальные копии данных вне контролируемого периметра.",
-          },
-          {
-            h: "Нормативные ограничения",
-            p: "Критическая информационная инфраструктура, Федеральный закон № 187-ФЗ, требования ФСТЭК России и Ростехнадзора, технологическая независимость — условия проектирования.",
-          },
-        ].map((card) => (
-          <Tile key={card.h}>
-            <p className="text-sm font-medium text-paper md:text-[15px]">{card.h}</p>
-            <p className="mt-2 text-xs leading-relaxed text-muted-foreground md:text-sm">
-              {card.p}
-            </p>
-          </Tile>
-        ))}
+    <SlideShell className="gap-3 md:gap-4">
+      <div>
+        <Kicker>Исходные условия</Kicker>
+        <SlideTitle>Технологический контур задаёт рамку. Унаследованное — разрывы обмена</SlideTitle>
       </div>
+      <figure className="scene-panel hud-corners relative min-h-0 flex-1 overflow-hidden rounded-3xl">
+        <Image
+          src="/visuals/vis-gateway.webp"
+          alt="Шлюз между технологическим контуром и цифровым двойником"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-linear-to-b from-black/35 via-black/20 to-black/50" />
+        <div className="relative grid h-full min-h-[280px] grid-cols-1 gap-3 p-3 sm:grid-cols-2 sm:p-4 lg:p-5">
+          {LANDSCAPE.map((card, i) => (
+            <article
+              key={card.h}
+              className={cn(
+                "glass-deep hud-corners max-w-xl rounded-2xl p-3.5 lg:p-4",
+                i % 2 === 1 && "sm:justify-self-end",
+                i < 2 ? "self-start" : "self-end"
+              )}
+            >
+              <p className="text-sm font-medium text-paper md:text-[15px]">{card.h}</p>
+              <p className="mt-2 text-xs leading-relaxed text-paper/75 md:text-sm">
+                {card.p}
+              </p>
+            </article>
+          ))}
+        </div>
+      </figure>
     </SlideShell>
   );
 }
@@ -177,23 +216,35 @@ const DOMAINS = [
 
 export function DomainsSlide() {
   return (
-    <SlideShell>
-      <Kicker>Состав</Kicker>
-      <SlideTitle>Семь доменов. Ни один не является необязательным</SlideTitle>
-      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-        {DOMAINS.map((item) => (
-          <Tile key={item.n}>
-            <p className="font-mono text-[11px] text-gold">{item.n}</p>
-            <p className="mt-1 text-sm font-medium text-paper md:text-base">{item.t}</p>
-            <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground md:text-sm">
-              {item.d}
-            </p>
-          </Tile>
-        ))}
+    <SlideShell className="gap-3 md:gap-4">
+      <div className="flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <Kicker>Состав</Kicker>
+          <SlideTitle>Семь доменов. Ни один не является необязательным</SlideTitle>
+        </div>
+        <p className="max-w-sm font-mono text-[11px] tracking-wide text-cyan uppercase lg:text-right">
+          Архитектура — правила, по которым системы имеют право соединяться
+        </p>
       </div>
-      <p className="font-mono text-[11px] tracking-wide text-cyan uppercase md:text-xs">
-        Архитектура — правила, по которым системы имеют право соединяться
-      </p>
+      <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <ScenePanel
+          src="/visuals/vis-domains.webp"
+          alt="Семь доменов архитектуры как световые столбы"
+          caption="Семь контуров одной конструкции"
+          className="hidden min-h-[240px] lg:block"
+        />
+        <ol className="grid min-h-0 grid-cols-1 gap-2 sm:grid-cols-2">
+          {DOMAINS.map((item) => (
+            <li key={item.n} className="glass-deep hud-corners rounded-2xl p-3 md:p-3.5">
+              <p className="font-mono text-[11px] text-gold">{item.n}</p>
+              <p className="mt-1 text-sm font-medium text-paper">{item.t}</p>
+              <p className="mt-1.5 text-xs leading-relaxed text-paper/70 md:text-[13px]">
+                {item.d}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </div>
     </SlideShell>
   );
 }
@@ -208,7 +259,7 @@ export function TargetSlide() {
             Управляемый гибрид. Слои и их содержание
           </SlideTitle>
         </div>
-        <p className="max-w-sm text-xs leading-relaxed text-muted-foreground md:text-right md:text-sm">
+        <p className="max-w-sm text-xs leading-relaxed text-paper/75 md:text-right md:text-sm">
           Технологический контур — по промышленному регламенту. Корпоративный — по
           продуктовому. Связь — только через архитектуру.
         </p>
@@ -220,49 +271,66 @@ export function TargetSlide() {
 
 export function DataSlide() {
   return (
-    <SlideShell>
-      <Kicker>Корпоративные данные</Kicker>
-      <SlideTitle>
-        Единое место факта. Не смешение информационного и операционного контуров
-      </SlideTitle>
-      <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-        <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-1">
-          <Tile className="border-gold/35 glow-gold">
-            <p className="font-mono text-[11px] text-gold">01</p>
-            <p className="mt-1 text-sm font-medium text-paper">
-              Корпоративное хранилище данных
-            </p>
-            <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground md:text-sm">
-              Согласованные витрины: актив, точка учёта, контрагент, сети,
-              финансы, надёжность. Историческая и аналитическая основа решений.
-            </p>
-          </Tile>
-          <Tile className="border-cyan/35 glow-cyan">
-            <p className="font-mono text-[11px] text-cyan">02</p>
-            <p className="mt-1 text-sm font-medium text-paper">Портал данных</p>
-            <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground md:text-sm">
-              Контролируемый доступ к каталогу, семантическому слою и
-              сертифицированным наборам. Самообслуживание без локальных копий.
-            </p>
-          </Tile>
-          <Tile className="border-violet/35 glow-violet">
-            <p className="font-mono text-[11px] text-violet">03</p>
-            <p className="mt-1 text-sm font-medium text-paper">Управление данными</p>
-            <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground md:text-sm">
-              Политики, качество, мастер-данные, владельцы, классификация,
-              происхождение, права доступа, в том числе для объектов критической
-              информационной инфраструктуры.
-            </p>
-          </Tile>
+    <SlideShell className="gap-3 md:gap-4">
+      <div>
+        <Kicker>Корпоративные данные</Kicker>
+        <SlideTitle>
+          Единое место факта. Не смешение информационного и операционного контуров
+        </SlideTitle>
+      </div>
+      <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
+        <div className="grid min-h-0 gap-2">
+          <ScenePanel
+            src="/visuals/vis-data-core.webp"
+            alt="Корпоративное хранилище данных как ядро согласованных витрин"
+            caption="Согласованная копия факта после шлюза"
+            className="min-h-[140px] lg:min-h-0"
+          />
+          <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-1">
+            {[
+              {
+                n: "01",
+                tone: "text-gold",
+                border: "border-gold/35 glow-gold",
+                t: "Корпоративное хранилище данных",
+                d: "Согласованные витрины: актив, точка учёта, контрагент, сети, финансы, надёжность. Историческая и аналитическая основа решений.",
+              },
+              {
+                n: "02",
+                tone: "text-cyan",
+                border: "border-cyan/35 glow-cyan",
+                t: "Портал данных",
+                d: "Контролируемый доступ к каталогу, семантическому слою и сертифицированным наборам. Самообслуживание без локальных копий.",
+              },
+              {
+                n: "03",
+                tone: "text-violet",
+                border: "border-violet/35 glow-violet",
+                t: "Управление данными",
+                d: "Политики, качество, мастер-данные, владельцы, классификация, происхождение, права доступа, в том числе для объектов критической информационной инфраструктуры.",
+              },
+            ].map((item) => (
+              <article
+                key={item.n}
+                className={cn("glass-deep hud-corners rounded-2xl p-3 md:p-3.5", item.border)}
+              >
+                <p className={cn("font-mono text-[11px]", item.tone)}>{item.n}</p>
+                <p className="mt-1 text-sm font-medium text-paper">{item.t}</p>
+                <p className="mt-1.5 hidden text-xs leading-relaxed text-paper/70 lg:block">
+                  {item.d}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
-        <Tile className="flex min-h-[200px] flex-col">
+        <Tile className="flex min-h-[200px] flex-col bg-black/25">
           <p className="font-mono text-[11px] tracking-widest text-gold uppercase">
             Зачем собирать в одном контуре
           </p>
           <div className="min-h-0 flex-1">
             <DataConstellation />
           </div>
-          <p className="text-xs leading-relaxed text-muted-foreground md:text-sm">
+          <p className="text-xs leading-relaxed text-paper/75 md:text-sm">
             Решение Холдинга пересекает процессы. Пока данные остаются только в
             системах-источниках, каждая функция оперирует собственной версией
             факта. Хранилище — согласованная копия после шлюза. «Архив процесса» —
@@ -311,31 +379,51 @@ const TRENDS = [
 
 export function TrendsSlide() {
   return (
-    <SlideShell>
-      <Kicker>Тренды и технологии</Kicker>
-      <SlideTitle>Оценить ценность. Допустить отрицательный пилот. Затем инвестировать</SlideTitle>
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
-        {TRENDS.map((item, i) => (
-          <Tile key={item.t}>
-            <p className="font-mono text-[11px] text-cyan">0{i + 1}</p>
-            <p className="mt-1 text-sm font-medium text-paper">{item.t}</p>
-            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{item.d}</p>
-          </Tile>
-        ))}
+    <SlideShell className="gap-3 md:gap-4">
+      <div>
+        <Kicker>Тренды и технологии</Kicker>
+        <SlideTitle>Оценить ценность. Допустить отрицательный пилот. Затем инвестировать</SlideTitle>
       </div>
-      <div className="grid gap-2 md:grid-cols-4">
-        {[
-          { n: "1", t: "Фиксация", d: "Технология и процесс, к которому она относится." },
-          { n: "2", t: "Гипотеза ценности", d: "Прикладной эффект для Холдинга, измеримый показатель." },
-          { n: "3", t: "Ограниченный пилот", d: "Отрицательный результат — штатный исход, не сбой программы." },
-          { n: "4", t: "Решение", d: "Масштабировать, доработать или прекратить инвестирование." },
-        ].map((step) => (
-          <Tile key={step.n} className="border-gold/25">
-            <p className="font-mono text-xs text-gold">{step.n}</p>
-            <p className="mt-1 text-sm font-medium text-paper">{step.t}</p>
-            <p className="mt-1 text-xs text-muted-foreground">{step.d}</p>
-          </Tile>
-        ))}
+      <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="grid min-h-0 gap-3">
+          <ScenePanel
+            src="/visuals/vis-twin.webp"
+            alt="Цифровой двойник турбины в машинном зале"
+            caption="Цифровой двойник — контур надёжности, не витрина"
+            className="min-h-[160px] lg:min-h-0"
+          />
+          <ScenePanel
+            src="/visuals/vis-ai-portal.webp"
+            alt="Маркетплейс сервисов искусственного интеллекта"
+            caption="Сервисы искусственного интеллекта — только на подготовленных данных"
+            className="hidden min-h-[120px] sm:block lg:min-h-0"
+          />
+        </div>
+        <div className="flex min-h-0 flex-col">
+          <ul className="grid min-h-0 flex-1 grid-cols-1 gap-1.5 sm:grid-cols-2">
+            {TRENDS.map((item, i) => (
+              <li key={item.t} className="border-l border-cyan/35 py-1 pl-3">
+                <p className="font-mono text-[10px] text-cyan">0{i + 1}</p>
+                <p className="text-[13px] leading-snug font-medium text-paper">{item.t}</p>
+                <p className="mt-0.5 text-[11px] leading-relaxed text-paper/65">{item.d}</p>
+              </li>
+            ))}
+          </ul>
+          <ol className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-4">
+            {[
+              { n: "1", t: "Фиксация", d: "Технология и процесс, к которому она относится." },
+              { n: "2", t: "Гипотеза ценности", d: "Прикладной эффект для Холдинга, измеримый показатель." },
+              { n: "3", t: "Ограниченный пилот", d: "Отрицательный результат — штатный исход, не сбой программы." },
+              { n: "4", t: "Решение", d: "Масштабировать, доработать или прекратить инвестирование." },
+            ].map((step) => (
+              <li key={step.n} className="glass-deep rounded-xl border-gold/25 p-2.5">
+                <p className="font-mono text-xs text-gold">{step.n}</p>
+                <p className="mt-1 text-xs font-medium text-paper">{step.t}</p>
+                <p className="mt-1 hidden text-[11px] text-paper/65 md:block">{step.d}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </SlideShell>
   );
@@ -343,46 +431,51 @@ export function TrendsSlide() {
 
 export function RequirementsSlide() {
   return (
-    <SlideShell>
-      <Kicker>Требования</Kicker>
-      <SlideTitle>Три уровня. Необходимы все, иначе либо медленно, либо рискованно</SlideTitle>
-      <div className="grid gap-3 md:grid-cols-3">
-        <Tile>
+    <SlideShell className="gap-4">
+      <div>
+        <Kicker>Требования</Kicker>
+        <SlideTitle>Три уровня. Необходимы все, иначе либо медленно, либо рискованно</SlideTitle>
+      </div>
+      <div className="grid min-h-0 flex-1 gap-3 md:grid-cols-3">
+        <article className="req-ring glass-deep hud-corners flex flex-col rounded-3xl p-5 text-violet">
+          <span className="req-orbit" aria-hidden />
           <p className="font-mono text-[11px] tracking-widest text-violet uppercase">
             Обязательно
           </p>
-          <p className="mt-1 text-sm font-medium text-paper">Право производить</p>
-          <ul className="mt-3 space-y-1.5 text-xs text-muted-foreground md:text-sm">
+          <p className="mt-2 text-lg font-medium text-paper">Право производить</p>
+          <ul className="mt-auto space-y-2 pt-6 text-sm text-paper/80">
             <li>Непрерывность технологического процесса</li>
             <li>Сегментация информационного и операционного контуров, критическая информационная инфраструктура</li>
             <li>Управляемые изменения, журнал</li>
             <li>Киберустойчивость и восстановление</li>
           </ul>
-        </Tile>
-        <Tile>
+        </article>
+        <article className="req-ring glass-deep hud-corners flex flex-col rounded-3xl p-5 text-cyan">
+          <span className="req-orbit" aria-hidden />
           <p className="font-mono text-[11px] tracking-widest text-cyan uppercase">
             Необходимо
           </p>
-          <p className="mt-1 text-sm font-medium text-paper">Эффективность изменений</p>
-          <ul className="mt-3 space-y-1.5 text-xs text-muted-foreground md:text-sm">
+          <p className="mt-2 text-lg font-medium text-paper">Эффективность изменений</p>
+          <ul className="mt-auto space-y-2 pt-6 text-sm text-paper/80">
             <li>Единый идентификатор актива и точки учёта</li>
             <li>Изменение за недели, не годы</li>
             <li>Наблюдаемость: источник сбоя и ответственность</li>
             <li>Снижение зависимости от одного поставщика</li>
           </ul>
-        </Tile>
-        <Tile className="border-gold/40 glow-gold">
+        </article>
+        <article className="req-ring glass-deep hud-corners glow-gold flex flex-col rounded-3xl border-gold/40 p-5 text-gold">
+          <span className="req-orbit" aria-hidden />
           <p className="font-mono text-[11px] tracking-widest text-gold uppercase">
             Преимущество
           </p>
-          <p className="mt-1 text-sm font-medium text-paper">Опережение сопоставимых игроков</p>
-          <ul className="mt-3 space-y-1.5 text-xs text-paper/85 md:text-sm">
+          <p className="mt-2 text-lg font-medium text-paper">Опережение сопоставимых игроков</p>
+          <ul className="mt-auto space-y-2 pt-6 text-sm text-paper/85">
             <li>Единая операционная картина Холдинга</li>
             <li>Решения ближе к реальному времени</li>
             <li>Скорость сервисов для сетей, сбыта и компаний</li>
             <li>Стоимость владения ниже сопоставимого уровня</li>
           </ul>
-        </Tile>
+        </article>
       </div>
     </SlideShell>
   );
@@ -390,33 +483,35 @@ export function RequirementsSlide() {
 
 export function PeopleSlide() {
   return (
-    <SlideShell>
-      <Kicker>Смещение ролей</Kicker>
-      <SlideTitle>
-        Бизнес собирает пилотный продукт. Информационные технологии обеспечивают глубину и безопасность
-      </SlideTitle>
-      <div className="grid gap-3 md:grid-cols-2">
-        <Tile className="border-cyan/35 glow-cyan">
+    <SlideShell className="gap-3 md:gap-4">
+      <div className="max-w-4xl">
+        <Kicker>Смещение ролей</Kicker>
+        <SlideTitle>
+          Бизнес собирает пилотный продукт. Информационные технологии обеспечивают глубину и безопасность
+        </SlideTitle>
+      </div>
+      <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-2">
+        <article className="glass-deep hud-corners glow-cyan relative overflow-hidden rounded-3xl p-5 md:p-6">
           <p className="font-mono text-[11px] tracking-widest text-cyan uppercase">
             Бизнес-пользователь
           </p>
-          <p className="mt-2 text-sm leading-relaxed text-paper md:text-[15px]">
+          <p className="mt-4 text-sm leading-relaxed text-paper md:text-[15px]">
             На портале данных, портале искусственного интеллекта и маркетплейсе
             сервисов, с применением программных интерфейсов и протокола контекста
             модели, самостоятельно формирует минимально жизнеспособный продукт:
             витрину, прототип процесса, аналитический контур, пилот сервиса.
           </p>
-          <p className="mt-3 text-xs text-muted-foreground md:text-sm">
+          <p className="mt-4 text-xs leading-relaxed text-paper/70 md:text-sm">
             Очередь «техническое задание — разработка информационной системой
             целиком» сокращается. Ответственность за формулировку ценности и
             проверку гипотезы переходит к владельцу процесса.
           </p>
-        </Tile>
-        <Tile className="border-gold/40 glow-gold">
+        </article>
+        <article className="glass-deep hud-corners glow-gold relative overflow-hidden rounded-3xl border-gold/40 p-5 md:p-6">
           <p className="font-mono text-[11px] tracking-widest text-gold uppercase">
             Информационные технологии
           </p>
-          <ul className="mt-3 space-y-2 text-sm text-paper/90 md:text-[15px]">
+          <ul className="mt-4 space-y-2 text-sm text-paper/90 md:text-[15px]">
             <li>Платформа, качество данных, мастер-данные, хранилище</li>
             <li>Сложные интеграции, включая технологический контур</li>
             <li>Требования информационной безопасности и режим критической информационной инфраструктуры</li>
@@ -424,9 +519,9 @@ export function PeopleSlide() {
             <li>Перевод прошедшего проверку продукта в промышленную эксплуатацию</li>
             <li>Отказ в подключении систем в обход стандарта</li>
           </ul>
-        </Tile>
+        </article>
       </div>
-      <p className="text-sm text-muted-foreground md:text-[15px]">
+      <p className="text-sm text-paper/75 md:text-[15px]">
         Службы автоматизированных систем управления технологическими процессами —
         соавторы архитектуры. Информационная безопасность встраивается в конвейер
         изменений, а не ограничивается финальным согласованием.
@@ -447,65 +542,104 @@ const STAGES = [
 
 export function RoadmapSlide() {
   return (
-    <SlideShell>
-      <Kicker>Этапы перехода</Kicker>
-      <SlideTitle>Последовательность, которая не останавливает станции</SlideTitle>
-      <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
+    <SlideShell className="gap-4">
+      <div>
+        <Kicker>Этапы перехода</Kicker>
+        <SlideTitle>Последовательность, которая не останавливает станции</SlideTitle>
+      </div>
+      <div className="relative hidden md:block">
+        <div className="roadmap-line" />
+        <ol className="relative grid grid-cols-7 gap-2">
+          {STAGES.map((item) => (
+            <li key={item.n} className="flex flex-col items-center text-center">
+              <span
+                className={cn(
+                  "roadmap-node font-mono text-xs",
+                  item.n === "2" && "roadmap-node-hot"
+                )}
+              >
+                {item.n}
+              </span>
+              <p className="mt-3 text-[13px] font-medium text-paper">{item.t}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <ol className="grid min-h-0 flex-1 grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
         {STAGES.map((item) => (
-          <Tile key={item.n} className={item.n === "2" ? "border-gold/40 glow-gold" : ""}>
+          <li
+            key={item.n}
+            className={cn(
+              "glass-deep hud-corners rounded-2xl p-3.5",
+              item.n === "2" && "border-gold/40 glow-gold"
+            )}
+          >
             <p className="font-mono text-sm text-gold">{item.n}</p>
             <p className="mt-1 text-sm font-medium text-paper">{item.t}</p>
-            <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground md:text-[13px]">
+            <p className="mt-1.5 text-xs leading-relaxed text-paper/70 md:text-[13px]">
               {item.d}
             </p>
-          </Tile>
+          </li>
         ))}
-      </div>
+      </ol>
     </SlideShell>
   );
 }
 
+const POLICIES = [
+  {
+    h: "Стратегия цифровой трансформации",
+    p: "Целевые способности Холдинга, приоритеты доменов, принципы архитектуры, порядок финансирования платформы и хранилища.",
+  },
+  {
+    h: "Стратегия данных",
+    p: "Корпоративное хранилище, портал данных, управление данными, владельцы, качество, классификация, доступ.",
+  },
+  {
+    h: "Стратегия перехода на методологию разработки с применением искусственного интеллекта",
+    p: "Кто вправе собирать минимально жизнеспособный продукт, как проверяется гипотеза, как ИТ принимает продукт в промышленную эксплуатацию.",
+  },
+  {
+    h: "Политика информационной безопасности с учётом решений на основе искусственного интеллекта",
+    p: "Допустимые модели, контуры данных, журнал обращений, запрет выгрузки технологического контура, оценка поставщиков сервисов.",
+  },
+  {
+    h: "Политика доступа к технологическому контуру",
+    p: "Зонная сегментация, шлюзы, однонаправленная передача, привилегированный доступ, промышленный регламент изменений.",
+  },
+  {
+    h: "Архитектурный стандарт и технологическая независимость",
+    p: "Правила подключения систем, каталог интерфейсов, допустимый и запрещённый стек, заменяемость компонентов.",
+  },
+];
+
 export function PrepareSlide() {
   return (
-    <SlideShell>
-      <Kicker>Подготовка Холдинга</Kicker>
-      <SlideTitle>Стратегии и политики — условие перехода, а не приложение к проекту</SlideTitle>
-      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-        {[
-          {
-            h: "Стратегия цифровой трансформации",
-            p: "Целевые способности Холдинга, приоритеты доменов, принципы архитектуры, порядок финансирования платформы и хранилища.",
-          },
-          {
-            h: "Стратегия данных",
-            p: "Корпоративное хранилище, портал данных, управление данными, владельцы, качество, классификация, доступ.",
-          },
-          {
-            h: "Стратегия перехода на методологию разработки с применением искусственного интеллекта",
-            p: "Кто вправе собирать минимально жизнеспособный продукт, как проверяется гипотеза, как ИТ принимает продукт в промышленную эксплуатацию.",
-          },
-          {
-            h: "Политика информационной безопасности с учётом решений на основе искусственного интеллекта",
-            p: "Допустимые модели, контуры данных, журнал обращений, запрет выгрузки технологического контура, оценка поставщиков сервисов.",
-          },
-          {
-            h: "Политика доступа к технологическому контуру",
-            p: "Зонная сегментация, шлюзы, однонаправленная передача, привилегированный доступ, промышленный регламент изменений.",
-          },
-          {
-            h: "Архитектурный стандарт и технологическая независимость",
-            p: "Правила подключения систем, каталог интерфейсов, допустимый и запрещённый стек, заменяемость компонентов.",
-          },
-        ].map((card) => (
-          <Tile key={card.h}>
-            <p className="text-sm font-medium text-paper md:text-[15px]">{card.h}</p>
-            <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground md:text-sm">
-              {card.p}
-            </p>
-          </Tile>
-        ))}
+    <SlideShell className="gap-3 md:gap-4">
+      <div>
+        <Kicker>Подготовка Холдинга</Kicker>
+        <SlideTitle>Стратегии и политики — условие перехода, а не приложение к проекту</SlideTitle>
       </div>
-      <p className="text-xs leading-relaxed text-muted-foreground md:text-sm">
+      <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+        <ScenePanel
+          src="/visuals/vis-policy.webp"
+          alt="Стратегии и политики как архитектурный свод правил"
+          caption="Свод правил. Не приложение к проекту"
+          className="min-h-[180px] lg:min-h-0"
+        />
+        <ol className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {POLICIES.map((card, i) => (
+            <li key={card.h} className="glass-deep hud-corners rounded-2xl p-3.5">
+              <p className="font-mono text-[11px] text-gold">0{i + 1}</p>
+              <p className="mt-1 text-sm font-medium text-paper md:text-[15px]">{card.h}</p>
+              <p className="mt-1.5 text-xs leading-relaxed text-paper/70 md:text-sm">
+                {card.p}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <p className="text-xs leading-relaxed text-paper/70 md:text-sm">
         Спонсорская связка: руководитель информационных технологий, руководитель
         информационной безопасности, главный инженер либо операционный директор.
         Архитектурный совет уполномочен остановить интеграцию в обход стандарта.
@@ -517,10 +651,12 @@ export function PrepareSlide() {
 
 export function Next90Slide() {
   return (
-    <SlideShell>
-      <Kicker>Первые решения</Kicker>
-      <SlideTitle>Три решения без ожидания завершённой целевой модели</SlideTitle>
-      <div className="grid gap-3 md:grid-cols-3">
+    <SlideShell className="justify-end gap-5 pb-2 md:pb-4">
+      <div className="max-w-3xl">
+        <Kicker>Первые решения</Kicker>
+        <SlideTitle>Три решения без ожидания завершённой целевой модели</SlideTitle>
+      </div>
+      <ol className="grid gap-3 md:grid-cols-3">
         {[
           {
             n: "01",
@@ -538,14 +674,14 @@ export function Next90Slide() {
             d: "Один домен и один актив: корпоративное хранилище, портал данных, портал искусственного интеллекта, проверка гипотезы ценности.",
           },
         ].map((item) => (
-          <Tile key={item.n} className="border-cyan/30">
+          <li key={item.n} className="glass-deep hud-corners rounded-3xl border-cyan/30 p-5">
             <p className="font-mono text-cyan">{item.n}</p>
-            <p className="mt-2 text-base font-medium text-paper">{item.t}</p>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.d}</p>
-          </Tile>
+            <p className="mt-3 text-base font-medium text-paper">{item.t}</p>
+            <p className="mt-2 text-sm leading-relaxed text-paper/75">{item.d}</p>
+          </li>
         ))}
-      </div>
-      <p className="max-w-3xl text-sm leading-relaxed text-paper/90 md:text-lg">
+      </ol>
+      <p className="max-w-3xl text-sm leading-relaxed text-paper md:text-lg">
         Унаследованные системы сохраняют функцию. Архитектура обеспечивает
         контролируемый переход данных и решений в целевой контур.
       </p>

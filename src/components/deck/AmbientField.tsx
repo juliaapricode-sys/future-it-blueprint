@@ -2,11 +2,11 @@ export function AmbientField() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <div
-        className="orb bg-violet/50"
+        className="orb bg-violet/28"
         style={{ width: 340, height: 340, top: "-8%", left: "-4%" }}
       />
       <div
-        className="orb bg-cyan/40"
+        className="orb bg-cyan/22"
         style={{
           width: 280,
           height: 280,
@@ -16,7 +16,7 @@ export function AmbientField() {
         }}
       />
       <div
-        className="orb bg-gold/30"
+        className="orb bg-gold/18"
         style={{
           width: 220,
           height: 220,

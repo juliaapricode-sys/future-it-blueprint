@@ -1,5 +1,6 @@
 "use client";
 
+import NextImage from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import {
@@ -10,6 +11,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import { AmbientField } from "@/components/deck/AmbientField";
+import { SceneBackdrop } from "@/components/deck/SceneBackdrop";
 import {
   AgendaSlide,
   DataSlide,
@@ -26,6 +28,7 @@ import {
   WhySlide,
 } from "@/components/deck/slides";
 import { Button } from "@/components/ui/button";
+import { SCENES } from "@/data/scenes";
 import { SLIDES, TALK_MINUTES } from "@/data/talk";
 import { cn } from "@/lib/utils";
 
@@ -95,6 +98,13 @@ export function Deck() {
     },
     [last]
   );
+
+  useEffect(() => {
+    SCENES.forEach((scene) => {
+      const image = new Image();
+      image.src = scene.src;
+    });
+  }, []);
 
   useEffect(() => {
     if (!running) return;
@@ -171,9 +181,14 @@ export function Deck() {
 
   return (
     <div className="deck-grid relative flex min-h-dvh flex-col">
+      <SceneBackdrop
+        src={SCENES[index].src}
+        alt={SCENES[index].alt}
+        variant={SCENES[index].variant}
+      />
       <div className="deck-noise" />
       <AmbientField />
-      <header className="no-print relative z-10 flex items-center justify-between gap-3 px-4 py-3 md:px-8">
+      <header className="no-print relative z-10 flex items-center justify-between gap-3 bg-linear-to-b from-black/45 to-transparent px-4 py-3 md:px-8">
         <div className="flex min-w-0 items-center gap-3">
           <span className="font-mono text-[10px] tracking-[0.2em] text-cyan uppercase">
             Холдинг · архитектура
@@ -249,14 +264,24 @@ export function Deck() {
                   type="button"
                   onClick={() => go(i)}
                   className={cn(
-                    "glass h-full w-full rounded-xl p-4 text-left transition-colors",
+                    "relative h-full min-h-[7.5rem] w-full overflow-hidden rounded-xl text-left transition-colors",
                     i === index
-                      ? "border-cyan/50 glow-cyan"
-                      : "hover:border-cyan/30"
+                      ? "ring-1 ring-cyan/70 glow-cyan"
+                      : "hover:ring-1 hover:ring-cyan/30"
                   )}
                 >
-                  <p className="font-mono text-[10px] text-gold">{slide.number}</p>
-                  <p className="mt-2 text-sm font-medium text-paper">{slide.kicker}</p>
+                  <NextImage
+                    src={SCENES[i].src}
+                    alt=""
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/45 to-black/15" />
+                  <div className="relative p-4">
+                    <p className="font-mono text-[10px] text-gold">{slide.number}</p>
+                    <p className="mt-2 text-sm font-medium text-paper">{slide.kicker}</p>
+                  </div>
                 </button>
               </li>
             ))}
@@ -290,7 +315,7 @@ export function Deck() {
         </aside>
       ) : null}
 
-      <footer className="no-print relative z-10 flex items-center justify-between gap-3 px-4 py-3 md:px-8">
+      <footer className="no-print relative z-10 flex items-center justify-between gap-3 bg-linear-to-t from-black/50 to-transparent px-4 py-3 md:px-8">
         <div className="flex items-center gap-2">
           <Button
             variant="outline"
