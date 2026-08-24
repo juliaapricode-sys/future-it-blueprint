@@ -16,7 +16,7 @@ export function TitleSlide() {
     <SlideShell className="justify-end pb-2 md:justify-end md:pb-6">
       <div className="max-w-3xl">
         <div className="busbar mb-5 w-32 md:w-48" />
-        <Kicker>Промышленный энергетический холдинг · внутренний доклад</Kicker>
+        <Kicker>Промышленный энергетический холдинг</Kicker>
         <h1 className="font-heading mt-3 max-w-[16ch] text-[2.15rem] leading-[1.05] font-medium tracking-tight text-paper text-glow sm:text-5xl md:text-6xl lg:text-[4.15rem]">
           Цифровая архитектура современного холдинга
         </h1>
