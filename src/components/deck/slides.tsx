@@ -8,7 +8,6 @@ import {
 } from "@/components/deck/SlideChrome";
 import { DataConstellation } from "@/components/diagrams/DataConstellation";
 import { ArchitectureStack } from "@/components/diagrams/TargetArchitecture";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 export function TitleSlide() {
@@ -25,12 +24,6 @@ export function TitleSlide() {
           технологического процесса и скорость обоснованного решения на
           достоверных данных.
         </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Badge variant="secondary">15 минут</Badge>
-          <Badge variant="outline">Информационные и операционные технологии</Badge>
-          <Badge variant="outline">Хранилище · портал · управление данными</Badge>
-          <Badge variant="outline">Критическая информационная инфраструктура</Badge>
-        </div>
       </div>
     </SlideShell>
   );
