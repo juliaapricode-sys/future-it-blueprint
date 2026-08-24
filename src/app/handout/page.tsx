@@ -39,7 +39,7 @@ export default function HandoutPage() {
               <CardTitle>Состав архитектуры</CardTitle>
             </CardHeader>
             <CardContent className="text-sm leading-relaxed text-muted-foreground">
-              Семь доменов: бизнес-способности, приложения, данные, интеграция,
+              Семь компонентов: бизнес-способности, приложения, данные, интеграция,
               платформа, безопасность, операционная модель. Архитектура — правила,
               по которым системы имеют право соединяться.
             </CardContent>

@@ -209,7 +209,7 @@ export function DomainsSlide() {
       <div className="flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <Kicker>Состав</Kicker>
-          <SlideTitle>Семь доменов. Ни один не является необязательным</SlideTitle>
+          <SlideTitle>Семь компонентов. Ни один не является необязательным</SlideTitle>
         </div>
         <p className="max-w-sm font-mono text-[11px] tracking-wide text-cyan uppercase lg:text-right">
           Архитектура — правила, по которым системы имеют право соединяться
@@ -218,7 +218,7 @@ export function DomainsSlide() {
       <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
         <ScenePanel
           src="/visuals/vis-domains.webp"
-          alt="Семь доменов архитектуры как световые столбы"
+          alt="Семь компонентов архитектуры как световые столбы"
           caption="Семь контуров одной конструкции"
           className="hidden min-h-[240px] lg:block"
         />

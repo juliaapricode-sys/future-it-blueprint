@@ -30,7 +30,7 @@ export const SCENES: SlideScene[] = [
   {
     src: "/visuals/vis-domains.webp",
     variant: "cinematic",
-    alt: "Семь доменов архитектуры как световые столбы",
+    alt: "Семь компонентов архитектуры как световые столбы",
   },
   {
     src: "/visuals/vis-architecture.webp",
