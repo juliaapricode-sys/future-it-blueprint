@@ -252,9 +252,6 @@ export function Deck() {
             Далее
           </Button>
         </div>
-        <p className="font-mono text-[11px] text-muted-foreground">
-          {String(index + 1).padStart(2, "0")} / {String(SLIDE_VIEWS.length).padStart(2, "0")}
-        </p>
         <p className="hidden font-mono text-[10px] text-white/35 md:block">
           ← → пробел · Esc обзор · ? справка
         </p>
