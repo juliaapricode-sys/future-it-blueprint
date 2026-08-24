@@ -242,9 +242,6 @@ export function Deck() {
             Далее
           </Button>
         </div>
-        <p className="hidden font-mono text-[10px] text-white/35 md:block">
-          ← → пробел · Esc обзор · ? справка
-        </p>
       </footer>
 
       {help ? (
