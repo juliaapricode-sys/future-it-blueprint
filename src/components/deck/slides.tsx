@@ -534,7 +534,9 @@ export function RoadmapSlide() {
     <SlideShell className="gap-4">
       <div>
         <Kicker>Этапы перехода</Kicker>
-        <SlideTitle>Последовательность, которая не останавливает станции</SlideTitle>
+        <SlideTitle className="max-w-[28ch] md:max-w-[32ch]">
+          Последовательность, которая ускоряет переход к новой архитектуре
+        </SlideTitle>
       </div>
       <div className="relative hidden md:block">
         <div className="roadmap-line" />
