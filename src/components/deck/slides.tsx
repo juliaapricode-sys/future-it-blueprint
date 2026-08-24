@@ -461,7 +461,7 @@ export function RequirementsSlide() {
           <ul className="mt-auto space-y-2 pt-6 text-sm text-paper/85">
             <li>Единая операционная картина Холдинга</li>
             <li>Решения ближе к реальному времени</li>
-            <li>Скорость сервисов для сетей, сбыта и компаний</li>
+            <li>Скорость сервисов</li>
             <li>Стоимость владения ниже сопоставимого уровня</li>
           </ul>
         </article>
