@@ -29,7 +29,7 @@ import {
 } from "@/components/deck/slides";
 import { Button } from "@/components/ui/button";
 import { SCENES } from "@/data/scenes";
-import { SLIDES, TALK_MINUTES } from "@/data/talk";
+import { SLIDES } from "@/data/talk";
 import { cn } from "@/lib/utils";
 
 const SLIDE_VIEWS = [
@@ -47,13 +47,6 @@ const SLIDE_VIEWS = [
   PrepareSlide,
   Next90Slide,
 ] as const;
-
-function formatClock(totalSec: number) {
-  const clamped = Math.max(0, totalSec);
-  const m = Math.floor(clamped / 60);
-  const s = clamped % 60;
-  return `${m}:${s.toString().padStart(2, "0")}`;
-}
 
 function parseSlideHash() {
   const fromHash = Number.parseInt(window.location.hash.replace("#", ""), 10);
@@ -76,15 +69,11 @@ export function Deck() {
   const index = useSyncExternalStore(subscribeHash, parseSlideHash, () => 0);
   const [overview, setOverview] = useState(false);
   const [help, setHelp] = useState(false);
-  const [running, setRunning] = useState(false);
-  const [elapsed, setElapsed] = useState(0);
   const [touchX, setTouchX] = useState<number | null>(null);
 
   const last = SLIDE_VIEWS.length - 1;
   const meta = SLIDES[index];
   const View = SLIDE_VIEWS[index];
-  const budget = TALK_MINUTES * 60;
-  const remaining = budget - elapsed;
 
   const go = useCallback(
     (next: number) => {
@@ -106,12 +95,6 @@ export function Deck() {
   }, []);
 
   useEffect(() => {
-    if (!running) return;
-    const id = window.setInterval(() => setElapsed((v) => v + 1), 1000);
-    return () => window.clearInterval(id);
-  }, [running]);
-
-  useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       if (target && ["INPUT", "TEXTAREA"].includes(target.tagName)) return;
@@ -125,10 +108,6 @@ export function Deck() {
       if (event.key === "Escape") {
         setHelp(false);
         setOverview((v) => !v);
-        return;
-      }
-      if (event.key === "t" || event.key === "T") {
-        setRunning((v) => !v);
         return;
       }
       if (event.key === "f" || event.key === "F") {
@@ -156,7 +135,6 @@ export function Deck() {
         event.key === "j"
       ) {
         event.preventDefault();
-        if (!running) setRunning(true);
         go(index + 1);
         return;
       }
@@ -167,7 +145,7 @@ export function Deck() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [go, index, last, running]);
+  }, [go, index, last]);
 
   const progress = useMemo(
     () => ((index + 1) / SLIDE_VIEWS.length) * 100,
@@ -206,21 +184,6 @@ export function Deck() {
           >
             Памятка
           </Link>
-          <button
-            type="button"
-            onClick={() => setRunning((v) => !v)}
-            className={cn(
-              "font-mono rounded-md px-2 py-1 text-[11px] tabular-nums",
-              remaining < 0
-                ? "text-destructive"
-                : remaining < 120
-                  ? "text-gold"
-                  : "text-cyan"
-            )}
-            aria-label="Таймер доклада"
-          >
-            {formatClock(remaining)}
-          </button>
         </div>
       </header>
 
@@ -301,10 +264,7 @@ export function Deck() {
           </Button>
           <Button
             size="sm"
-            onClick={() => {
-              if (!running) setRunning(true);
-              go(index + 1);
-            }}
+            onClick={() => go(index + 1)}
             disabled={index === last}
           >
             Далее
@@ -314,7 +274,7 @@ export function Deck() {
           {String(index + 1).padStart(2, "0")} / {String(SLIDE_VIEWS.length).padStart(2, "0")}
         </p>
         <p className="hidden font-mono text-[10px] text-white/35 md:block">
-          ← → пробел · T таймер · Esc обзор · ? справка
+          ← → пробел · Esc обзор · ? справка
         </p>
       </footer>
 
@@ -330,7 +290,6 @@ export function Deck() {
             <p className="font-heading text-lg text-paper">Управление</p>
             <ul className="mt-3 space-y-2 font-mono text-xs text-muted-foreground">
               <li>← → / пробел / J K — слайды</li>
-              <li>T — старт и пауза таймера 15:00</li>
               <li>F — полный экран</li>
               <li>Esc — обзор всех слайдов</li>
               <li>Home / End — начало и конец</li>
