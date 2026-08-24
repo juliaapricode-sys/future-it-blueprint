@@ -74,7 +74,6 @@ function subscribeHash(onStoreChange: () => void) {
 
 export function Deck() {
   const index = useSyncExternalStore(subscribeHash, parseSlideHash, () => 0);
-  const [notes, setNotes] = useState(false);
   const [overview, setOverview] = useState(false);
   const [help, setHelp] = useState(false);
   const [running, setRunning] = useState(false);
@@ -126,10 +125,6 @@ export function Deck() {
       if (event.key === "Escape") {
         setHelp(false);
         setOverview((v) => !v);
-        return;
-      }
-      if (event.key === "n" || event.key === "N") {
-        setNotes((v) => !v);
         return;
       }
       if (event.key === "t" || event.key === "T") {
@@ -211,14 +206,6 @@ export function Deck() {
           >
             Памятка
           </Link>
-          <Button
-            variant="ghost"
-            size="xs"
-            onClick={() => setNotes((v) => !v)}
-            className="font-mono text-[10px] tracking-wide uppercase"
-          >
-            Заметки
-          </Button>
           <button
             type="button"
             onClick={() => setRunning((v) => !v)}
@@ -302,19 +289,6 @@ export function Deck() {
         )}
       </main>
 
-      {notes && !overview && meta ? (
-        <aside className="glass relative z-10 mx-4 mb-3 rounded-xl border-cyan/20 p-3 md:mx-8 md:p-4">
-          <p className="font-mono text-[10px] tracking-widest text-cyan uppercase">
-            Заметки докладчика · {Math.round(meta.durationSec / 60)} мин
-          </p>
-          <ul className="mt-2 space-y-1 text-sm text-paper/90">
-            {meta.notes.map((note) => (
-              <li key={note}>{note}</li>
-            ))}
-          </ul>
-        </aside>
-      ) : null}
-
       <footer className="no-print relative z-10 flex items-center justify-between gap-3 bg-linear-to-t from-black/50 to-transparent px-4 py-3 md:px-8">
         <div className="flex items-center gap-2">
           <Button
@@ -340,7 +314,7 @@ export function Deck() {
           {String(index + 1).padStart(2, "0")} / {String(SLIDE_VIEWS.length).padStart(2, "0")}
         </p>
         <p className="hidden font-mono text-[10px] text-white/35 md:block">
-          ← → пробел · N заметки · T таймер · Esc обзор · ? справка
+          ← → пробел · T таймер · Esc обзор · ? справка
         </p>
       </footer>
 
@@ -356,7 +330,6 @@ export function Deck() {
             <p className="font-heading text-lg text-paper">Управление</p>
             <ul className="mt-3 space-y-2 font-mono text-xs text-muted-foreground">
               <li>← → / пробел / J K — слайды</li>
-              <li>N — заметки докладчика</li>
               <li>T — старт и пауза таймера 15:00</li>
               <li>F — полный экран</li>
               <li>Esc — обзор всех слайдов</li>

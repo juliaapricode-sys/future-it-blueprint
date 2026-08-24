@@ -18,8 +18,7 @@ export default function ScriptPage() {
         </h1>
         <p className="mt-4 text-sm text-muted-foreground">
           Обращение в камеру, не доклад в зале. Темп спокойный, около 120 слов в
-          минуту. Каждый блок начинается с перехода на следующий кадр. На слайде
-          заметки — клавиша N.
+          минуту. Каждый блок начинается с перехода на следующий кадр.
         </p>
         <div className="mt-6 flex gap-2">
           <Button nativeButton={false} render={<Link href="/" />}>
