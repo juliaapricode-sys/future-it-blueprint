@@ -130,6 +130,12 @@ const toneClass: Record<(typeof LAYERS)[number]["tone"], string> = {
   violet: "border-violet/40 glow-violet",
 };
 
+const zoneNeon: Record<(typeof LAYERS)[number]["tone"], string> = {
+  cyan: "neon-cyan",
+  gold: "neon-gold",
+  violet: "neon-violet",
+};
+
 export function ArchitectureStack() {
   return (
     <div className="arch-tower flex min-h-0 flex-1 flex-col justify-end gap-[3px]">
@@ -147,7 +153,12 @@ export function ArchitectureStack() {
               zIndex: LAYERS.length - i,
             }}
           >
-            <span className="font-mono text-[9px] leading-tight tracking-[0.08em] text-paper/80 uppercase sm:text-[10px]">
+            <span
+              className={cn(
+                "font-mono text-[9px] leading-tight font-medium tracking-[0.12em] uppercase sm:text-[10px]",
+                zoneNeon[layer.tone]
+              )}
+            >
               {layer.zone}
             </span>
             <p className="hidden min-w-0 text-[11px] leading-tight font-medium text-paper sm:block md:text-xs">
