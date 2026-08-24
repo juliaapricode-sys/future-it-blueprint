@@ -42,7 +42,6 @@ export function AgendaSlide() {
   return (
     <SlideShell className="gap-4 md:gap-5">
       <div>
-        <Kicker>Повестка</Kicker>
         <SlideTitle>Шесть блоков. Без деклараций о «цифровизации»</SlideTitle>
       </div>
       <div className="grid min-h-0 flex-1 gap-4 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
