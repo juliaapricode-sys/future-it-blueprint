@@ -30,12 +30,12 @@ export function TitleSlide() {
 }
 
 const AGENDA = [
-  { t: "01", label: "Назначение архитектуры для Холдинга", min: "1 мин" },
-  { t: "02", label: "Состав и целевые слои", min: "3 мин" },
-  { t: "03", label: "Хранилище, портал и управление данными", min: "2 мин" },
-  { t: "04", label: "Тренды: оценка ценности, а не копирование", min: "2 мин" },
-  { t: "05", label: "Требования и смещение ролей ИТ и бизнеса", min: "3 мин" },
-  { t: "06", label: "Этапы, стратегии, политики, первые решения", min: "4 мин" },
+  { t: "01", label: "Назначение архитектуры для Холдинга" },
+  { t: "02", label: "Состав и целевые слои" },
+  { t: "03", label: "Хранилище, портал и управление данными" },
+  { t: "04", label: "Тренды: оценка ценности, а не копирование" },
+  { t: "05", label: "Требования и смещение ролей ИТ и бизнеса" },
+  { t: "06", label: "Этапы, стратегии, политики, первые решения" },
 ];
 
 export function AgendaSlide() {
@@ -55,9 +55,6 @@ export function AgendaSlide() {
               <div className="min-w-0 pt-0.5">
                 <p className="text-sm leading-snug font-medium text-paper md:text-base">
                   {item.label}
-                </p>
-                <p className="mt-1 font-mono text-[11px] text-muted-foreground">
-                  {item.min}
                 </p>
               </div>
             </li>
