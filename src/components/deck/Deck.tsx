@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { Button } from "@/components/ui/button";
 import {
   AgendaSlide,
@@ -44,19 +50,25 @@ function formatClock(totalSec: number) {
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
+function parseSlideHash() {
+  const fromHash = Number.parseInt(window.location.hash.replace("#", ""), 10);
+  if (
+    !Number.isNaN(fromHash) &&
+    fromHash >= 0 &&
+    fromHash < SLIDE_VIEWS.length
+  ) {
+    return fromHash;
+  }
+  return 0;
+}
+
+function subscribeHash(onStoreChange: () => void) {
+  window.addEventListener("hashchange", onStoreChange);
+  return () => window.removeEventListener("hashchange", onStoreChange);
+}
+
 export function Deck() {
-  const [index, setIndex] = useState(() => {
-    if (typeof window === "undefined") return 0;
-    const fromHash = Number.parseInt(window.location.hash.replace("#", ""), 10);
-    if (
-      !Number.isNaN(fromHash) &&
-      fromHash >= 0 &&
-      fromHash < SLIDE_VIEWS.length
-    ) {
-      return fromHash;
-    }
-    return 0;
-  });
+  const index = useSyncExternalStore(subscribeHash, parseSlideHash, () => 0);
   const [notes, setNotes] = useState(false);
   const [overview, setOverview] = useState(false);
   const [help, setHelp] = useState(false);
@@ -73,23 +85,14 @@ export function Deck() {
   const go = useCallback(
     (next: number) => {
       const clamped = Math.max(0, Math.min(last, next));
-      setIndex(clamped);
       setOverview(false);
-      window.location.hash = String(clamped);
+      const nextHash = `#${clamped}`;
+      if (window.location.hash !== nextHash) {
+        window.location.hash = String(clamped);
+      }
     },
     [last]
   );
-
-  useEffect(() => {
-    const onHash = () => {
-      const fromHash = Number.parseInt(window.location.hash.replace("#", ""), 10);
-      if (!Number.isNaN(fromHash) && fromHash >= 0 && fromHash <= last) {
-        setIndex(fromHash);
-      }
-    };
-    window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
-  }, [last]);
 
   useEffect(() => {
     if (!running) return;
@@ -101,6 +104,7 @@ export function Deck() {
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       if (target && ["INPUT", "TEXTAREA"].includes(target.tagName)) return;
+      if (event.key === " " && target?.tagName === "BUTTON") return;
 
       if (event.key === "?" || (event.shiftKey && event.key === "/")) {
         event.preventDefault();
