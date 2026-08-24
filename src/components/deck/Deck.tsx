@@ -178,12 +178,6 @@ export function Deck() {
           >
             Текст
           </Link>
-          <Link
-            href="/handout"
-            className="hidden font-mono text-[10px] tracking-wide text-muted-foreground uppercase hover:text-paper md:inline"
-          >
-            Памятка
-          </Link>
         </div>
       </header>
 
