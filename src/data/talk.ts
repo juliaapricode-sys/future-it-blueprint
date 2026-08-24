@@ -19,7 +19,7 @@ export const SLIDES: SlideMeta[] = [
   },
   {
     id: "agenda",
-    kicker: "Структура доклада",
+    kicker: "Повестка",
     number: "01",
     durationSec: 30,
     notes: [
