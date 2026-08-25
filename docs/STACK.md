@@ -37,4 +37,4 @@ npm run pack:port      # архив для отдельного порта 43217
 npm run pack:html      # архив в подкаталог /holding-architecture/ на уже существующем домене
 ```
 
-На Timeweb Node.js не нужен. Архив `holding-deck-timeweb.zip` после `build:timeweb` содержит только папку `holding-architecture/`: её добавляют в корень сайта, текущие страницы не заменяют.
+На Timeweb Node.js не нужен. Для отдельного порта: `npm run pack:port` и nginx `listen 43217`. Для пути на уже существующем домене: `npm run pack:html`.
