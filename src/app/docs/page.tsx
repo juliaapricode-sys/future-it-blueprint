@@ -57,9 +57,10 @@ export default function DocsPage() {
         <ol className="list-decimal space-y-2 pl-5">
           <li>
             На своём компьютере выполните{" "}
-            <code className="text-cyan">npm run build:timeweb</code>. Появится
-            архив <code className="text-cyan">holding-deck-timeweb.zip</code> с
-            одной папкой <code className="text-cyan">holding-architecture/</code>
+            <code className="text-cyan">npm run pack:html</code>. Появится архив{" "}
+            <code className="text-cyan">holding-architecture-html.zip</code> с
+            одной папкой <code className="text-cyan">holding-architecture/</code>{" "}
+            и файлом <code className="text-cyan">index.html</code>
             .
           </li>
           <li>

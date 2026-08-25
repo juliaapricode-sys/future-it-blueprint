@@ -7,6 +7,8 @@
     "dev": "next dev --hostname 0.0.0.0 --port 43217",
     "build": "next build && node scripts/pack-timeweb.mjs",
     "build:timeweb": "NEXT_PUBLIC_BASE_PATH=/holding-architecture next build && TIMEWEB_SUBDIR=holding-architecture node scripts/pack-timeweb.mjs",
+    "pack:html": "node scripts/pack-html.mjs",
+    "start:html": "npx --yes serve html --listen tcp://0.0.0.0:43218",
     "start": "npx --yes serve out --listen tcp://0.0.0.0:43217",
     "deploy:timeweb": "bash scripts/deploy-timeweb.sh",
     "lint": "eslint"

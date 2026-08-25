@@ -35,7 +35,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - Разработка: `npm run dev` (порт 43217)
 - Выгрузка локальная: `npm run build` → `out/`
-- Выгрузка на Timeweb рядом с уже существующим сайтом: `npm run build:timeweb` → архив с папкой `holding-architecture/` (корень сайта не затирать)
+- HTML для Timeweb: `html/index.html` — 13 слайдов без Node.js; архив: `npm run pack:html`
 - Просмотр сборки: `npm start`
 
 Не возвращать обязательный сервер Node.js, если задача — размещение на Timeweb как обычный сайт.

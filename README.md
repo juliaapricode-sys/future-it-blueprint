@@ -21,24 +21,17 @@
 
 ## Как показать коллегам с Timeweb
 
-Доклад кладётся в **отдельный каталог** `holding-architecture/` на уже работающем сайте. Корневой `index.html` и остальные текущие файлы не заменяются.
+Доклад доступен как **обычная HTML-страница** — без Node.js. На уже работающем сайте она кладётся в отдельный каталог `holding-architecture/`. Корневой `index.html` не заменяется.
 
-1. На своём компьютере (Node.js 20+):
+1. Возьмите архив `holding-architecture-html.zip` (после `npm run pack:html`) либо папку `html/`.
 
-```bash
-npm install
-npm run build:timeweb
-```
+2. Распакуйте архив в корень сайта. Появится только каталог `holding-architecture/` с файлом `index.html`.
 
-2. Появится архив `holding-deck-timeweb.zip`. Внутри него одна папка `holding-architecture/`.
+3. Ссылка: `https://ваш-домен.ru/holding-architecture/`
 
-3. На сервере Timeweb распакуйте архив в корень сайта (`public_html` или каталог, который уже отдаёт текущий сайт). Должен появиться путь `…/holding-architecture/index.html`. Ничего из уже лежащих файлов удалять не нужно.
+Управление слайдами: стрелки, пробел, J/K; F — полный экран; Esc — обзор.
 
-4. Ссылка для коллег: `https://ваш-домен.ru/holding-architecture/`
-
-Документация: `https://ваш-домен.ru/holding-architecture/docs/`.
-
-Сборка `npm run build` без суффикса `:timeweb` остаётся для локального просмотра с корня (`npm start`).
+Сборка `npm run build` без суффикса остаётся для локального React-просмотра (`npm start`). HTML-версия: `npm run pack:html` и `npm run start:html` (порт 43218).
 
 ## Как запустить локально
 
