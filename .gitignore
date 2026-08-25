@@ -23,8 +23,7 @@ holding-architecture-html.zip
 .tmp-html-zip/
 
 # Copied into html/ by npm run pack:html
-html/visuals/
-html/downloads/
+html/
 
 # production
 /build

@@ -37,6 +37,7 @@ export function SceneBackdrop({
             alt={alt}
             fill
             priority
+            quality={100}
             sizes="100vw"
             className="ken-burns object-cover"
           />

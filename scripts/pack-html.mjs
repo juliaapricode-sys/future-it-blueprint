@@ -1,61 +1,31 @@
-import { cpSync, existsSync, mkdirSync, rmSync } from "node:fs";
+import { copyFileSync, existsSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const htmlDir = path.join(root, "html");
-const visualsFrom = path.join(root, "public", "visuals");
-const visualsTo = path.join(htmlDir, "visuals");
-const zipPath = path.join(root, "holding-architecture-html.zip");
+const from = path.join(root, "holding-deck-timeweb.zip");
+const to = path.join(root, "holding-architecture-html.zip");
 
-if (!existsSync(path.join(htmlDir, "index.html"))) {
-  console.error("Нет html/index.html");
+if (!existsSync(from)) {
+  console.error(
+    "Нет holding-deck-timeweb.zip. HTML-страница — это полная кинематографическая сборка. Сначала: npm run build:timeweb",
+  );
   process.exit(1);
 }
 
-mkdirSync(visualsTo, { recursive: true });
-cpSync(visualsFrom, visualsTo, { recursive: true });
+copyFileSync(from, to);
+console.log(
+  "Собран",
+  to,
+  "— тот же доклад, что на экране разработки: сцены, шторы, стекло, анимация кадра.",
+);
 
-const downloads = path.join(htmlDir, "downloads");
-mkdirSync(downloads, { recursive: true });
-for (const name of [
-  "Holding-digital-architecture.pdf",
-  "Holding-digital-architecture.pptx",
-]) {
-  const from = path.join(root, name);
-  if (existsSync(from)) cpSync(from, path.join(downloads, name));
-}
-
-if (existsSync(zipPath)) rmSync(zipPath);
-
-const stagingParent = path.join(root, ".tmp-html-zip");
-const wrapped = path.join(stagingParent, "holding-architecture");
-rmSync(stagingParent, { recursive: true, force: true });
-mkdirSync(wrapped, { recursive: true });
-for (const name of [
-  "index.html",
-  "styles.css",
-  "deck.js",
-  ".htaccess",
-  "favicon.svg",
-  "favicon.ico",
-  "visuals",
-  "downloads",
-]) {
-  const from = path.join(htmlDir, name);
-  if (existsSync(from)) cpSync(from, path.join(wrapped, name), { recursive: true });
-}
-
-const zip = spawnSync("zip", ["-r", "-q", zipPath, "holding-architecture"], {
-  cwd: stagingParent,
+const restore = spawnSync("npx", ["next", "build"], {
+  cwd: root,
   stdio: "inherit",
+  env: { ...process.env, NEXT_PUBLIC_BASE_PATH: "" },
 });
-rmSync(stagingParent, { recursive: true, force: true });
-
-if (zip.status !== 0) {
-  console.error("Не удалось собрать HTML-архив. Папка html/ готова к загрузке.");
-  process.exit(0);
+if (restore.status !== 0) {
+  console.error("Архив готов, но локальную сборку без префикса пути восстановить не удалось.");
 }
-
-console.log("Собран", zipPath);

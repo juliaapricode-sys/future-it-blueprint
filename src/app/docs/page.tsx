@@ -58,9 +58,9 @@ export default function DocsPage() {
           <li>
             На своём компьютере выполните{" "}
             <code className="text-cyan">npm run pack:html</code>. Появится архив{" "}
-            <code className="text-cyan">holding-architecture-html.zip</code> с
-            одной папкой <code className="text-cyan">holding-architecture/</code>{" "}
-            и файлом <code className="text-cyan">index.html</code>
+            <code className="text-cyan">holding-architecture-html.zip</code> — та
+            же кинематографическая страница, что на экране доклада, в папке{" "}
+            <code className="text-cyan">holding-architecture/</code>
             .
           </li>
           <li>
