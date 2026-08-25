@@ -33,8 +33,8 @@
 npm run dev            # разработка, порт 43217
 npm run build          # HTML в папке out/ (локальный просмотр с корня)
 npm start              # раздача out/ на порту 43217
-npm run pack:html      # кинематографическая HTML-сборка в holding-architecture-html.zip
-npm run start:html     # та же страница на порту 43218
+npm run pack:port      # архив для отдельного порта 43217 (без префикса пути)
+npm run pack:html      # архив в подкаталог /holding-architecture/ на уже существующем домене
 ```
 
 На Timeweb Node.js не нужен. Архив `holding-deck-timeweb.zip` после `build:timeweb` содержит только папку `holding-architecture/`: её добавляют в корень сайта, текущие страницы не заменяют.

@@ -56,35 +56,29 @@ export default function DocsPage() {
       <DocCard title="Как открыть коллегам с Timeweb">
         <ol className="list-decimal space-y-2 pl-5">
           <li>
-            На своём компьютере выполните{" "}
-            <code className="text-cyan">npm run pack:html</code>. Появится архив{" "}
-            <code className="text-cyan">holding-architecture-html.zip</code> — та
-            же кинематографическая страница, что на экране доклада, в папке{" "}
-            <code className="text-cyan">holding-architecture/</code>
-            .
+            Сборка на отдельный порт:{" "}
+            <code className="text-cyan">npm run pack:port</code>. Архив{" "}
+            <code className="text-cyan">holding-architecture-port.zip</code>.
           </li>
           <li>
-            Распакуйте архив в корень уже работающего сайта (
-            <code className="text-cyan">public_html</code> или каталог, который
-            сейчас отдаёт текущие страницы). Текущий{" "}
-            <code className="text-cyan">index.html</code> и остальные файлы не
-            заменяются — добавляется только новый каталог.
+            На сервере распакуйте в{" "}
+            <code className="text-cyan">/var/www/holding-architecture</code>, не
+            в корень текущего сайта. Подключите nginx из{" "}
+            <code className="text-cyan">
+              deploy/nginx-holding-architecture-43217.conf
+            </code>{" "}
+            — он слушает только порт 43217.
           </li>
           <li>
-            Ссылка для коллег:{" "}
-            <code className="text-cyan">
-              https://ваш-домен.ru/holding-architecture/
-            </code>
-            . Документация:{" "}
-            <code className="text-cyan">
-              https://ваш-домен.ru/holding-architecture/docs/
-            </code>
-            .
+            Откройте TCP 43217 в файрволе панели Timeweb, если файрвол включён.
+            Ссылка:{" "}
+            <code className="text-cyan">http://IP-сервера:43217/</code>. Сайт на
+            портах 80 и 443 не изменяется.
           </li>
         </ol>
         <p>
-          Node.js на сервере Timeweb не нужен. Это статические файлы, как у
-          обычного сайта.
+          Node.js на сервере не нужен. Подробности — в README, раздел про
+          отдельный порт.
         </p>
       </DocCard>
 

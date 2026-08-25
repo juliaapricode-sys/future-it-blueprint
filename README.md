@@ -19,19 +19,48 @@
 
 Документация в файлах: `AGENTS.md`, `docs/BRANDBOOK.md`, `docs/STACK.md`.
 
-## Как показать коллегам с Timeweb
+## Как разместить на сервере Timeweb на отдельном порту
 
-Доклад на Timeweb — **та же кинематографическая веб-страница**, что и в разработке: полноэкранные сцены, шторы кадра, стекло, шина, анимация ken-burns. Это статическая HTML-сборка, Node.js на сервере не нужен. На уже работающем сайте она кладётся в отдельный каталог `holding-architecture/`. Корневой `index.html` не заменяется.
+Текущий сайт на портах 80 и 443 не трогаем. Доклад слушает **свой порт 43217** из отдельного каталога `/var/www/holding-architecture`.
 
-1. `npm run pack:html` — архив `holding-architecture-html.zip`.
+Нужна сборка **без** префикса пути: страница открывается как `http://IP:43217/`, а не `/holding-architecture/`.
 
-2. Распакуйте архив в корень сайта. Появится только каталог `holding-architecture/`.
+1. Соберите архив:
 
-3. Ссылка: `https://ваш-домен.ru/holding-architecture/`
+```bash
+npm run pack:port
+```
 
-Управление слайдами: стрелки, пробел, J/K; F — полный экран; Esc — обзор.
+Появится `holding-architecture-port.zip` — внутри папка `holding-architecture/` с полной кинематографической страницей.
 
-Локально та же страница: `npm run build` и `npm start` (порт 43217) или `npm run start:html` (порт 43218).
+2. На сервере (консоль в панели Timeweb или SSH), **не** распаковывая в корень текущего сайта:
+
+```bash
+sudo mkdir -p /var/www/holding-architecture
+sudo unzip -o holding-architecture-port.zip -d /tmp
+sudo rsync -a --delete /tmp/holding-architecture/ /var/www/holding-architecture/
+```
+
+3. Добавьте отдельный сайт nginx (файл уже в репозитории: `deploy/nginx-holding-architecture-43217.conf`):
+
+```bash
+sudo cp deploy/nginx-holding-architecture-43217.conf /etc/nginx/sites-available/holding-architecture-43217.conf
+sudo ln -sfn /etc/nginx/sites-available/holding-architecture-43217.conf /etc/nginx/sites-enabled/holding-architecture-43217.conf
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+Конфигурация только `listen 43217`. Блоки существующего сайта не редактируются.
+
+4. Откройте порт:
+
+- на сервере: `sudo ufw allow 43217/tcp` (если включён ufw);
+- в панели Timeweb: [Сети → Firewall](https://timeweb.cloud/my/firewalls) — входящий TCP **43217**, если к серверу привязан разрешающий файрвол. Если файрвол не создан, панель его не фильтрует.
+
+5. Ссылка для коллег: `http://IP-сервера:43217/`
+
+Node.js на сервере не нужен: nginx отдаёт статику. Если nginx нет, поставьте его (`sudo apt install nginx`) — это не заменяет сайт на 80, пока вы не меняете его конфигурацию.
+
+Если есть SSH с этой машины: `TIMEWEB_HOST=IP npm run deploy:timeweb-port`.
 
 ## Как запустить локально
 

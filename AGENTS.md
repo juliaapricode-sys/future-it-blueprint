@@ -35,7 +35,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - Разработка: `npm run dev` (порт 43217)
 - Выгрузка локальная: `npm run build` → `out/`
-- Выгрузка HTML для Timeweb: `npm run pack:html` — полная кинематографическая статическая сборка в каталог `holding-architecture/` (корень сайта не затирать)
+- Выгрузка на отдельный порт Timeweb: `npm run pack:port` → каталог `/var/www/holding-architecture` и nginx `listen 43217` (`deploy/nginx-holding-architecture-43217.conf`). Сайты на 80 и 443 не менять.
 - Просмотр сборки: `npm start`
 
 Не возвращать обязательный сервер Node.js, если задача — размещение на Timeweb как обычный сайт.

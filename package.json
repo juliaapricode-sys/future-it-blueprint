@@ -10,7 +10,8 @@
     "pack:html": "npm run build:timeweb && node scripts/pack-html.mjs",
     "start:html": "npx --yes serve out --listen tcp://0.0.0.0:43218",
     "start": "npx --yes serve out --listen tcp://0.0.0.0:43217",
-    "deploy:timeweb": "bash scripts/deploy-timeweb.sh",
+    "pack:port": "next build && TIMEWEB_SUBDIR=holding-architecture node scripts/pack-timeweb.mjs && node -e \"require('fs').copyFileSync('holding-deck-timeweb.zip','holding-architecture-port.zip')\"",
+    "deploy:timeweb-port": "bash scripts/deploy-timeweb-port.sh",
     "lint": "eslint"
   },
   "dependencies": {
