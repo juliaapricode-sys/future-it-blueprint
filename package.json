@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0 --port 43217",
     "build": "next build && node scripts/pack-timeweb.mjs",
+    "build:timeweb": "NEXT_PUBLIC_BASE_PATH=/holding-architecture next build && TIMEWEB_SUBDIR=holding-architecture node scripts/pack-timeweb.mjs",
     "start": "npx --yes serve out --listen tcp://0.0.0.0:43217",
+    "deploy:timeweb": "bash scripts/deploy-timeweb.sh",
     "lint": "eslint"
   },
   "dependencies": {

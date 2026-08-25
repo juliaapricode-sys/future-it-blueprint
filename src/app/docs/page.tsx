@@ -56,21 +56,29 @@ export default function DocsPage() {
       <DocCard title="Как открыть коллегам с Timeweb">
         <ol className="list-decimal space-y-2 pl-5">
           <li>
-            На своём компьютере выполните <code className="text-cyan">npm run build</code>.
-            Появится папка <code className="text-cyan">out/</code> — готовый сайт из
-            HTML, стилей, скриптов и картинок.
+            На своём компьютере выполните{" "}
+            <code className="text-cyan">npm run build:timeweb</code>. Появится
+            архив <code className="text-cyan">holding-deck-timeweb.zip</code> с
+            одной папкой <code className="text-cyan">holding-architecture/</code>
+            .
           </li>
           <li>
-            В панели Timeweb откройте файловый менеджер хостинга (или FTP) и
-            загрузите <strong className="text-paper">содержимое</strong> папки{" "}
-            <code className="text-cyan">out/</code> в{" "}
-            <code className="text-cyan">public_html</code> (или корень сайта).
+            Распакуйте архив в корень уже работающего сайта (
+            <code className="text-cyan">public_html</code> или каталог, который
+            сейчас отдаёт текущие страницы). Текущий{" "}
+            <code className="text-cyan">index.html</code> и остальные файлы не
+            заменяются — добавляется только новый каталог.
           </li>
           <li>
-            Отправьте коллегам адрес сайта, например{" "}
-            <code className="text-cyan">https://ваш-домен.ru</code> — откроется
-            доклад. Документация:{" "}
-            <code className="text-cyan">https://ваш-домен.ru/docs/</code>.
+            Ссылка для коллег:{" "}
+            <code className="text-cyan">
+              https://ваш-домен.ru/holding-architecture/
+            </code>
+            . Документация:{" "}
+            <code className="text-cyan">
+              https://ваш-домен.ru/holding-architecture/docs/
+            </code>
+            .
           </li>
         </ol>
         <p>

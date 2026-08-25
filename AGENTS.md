@@ -34,7 +34,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 Статический экспорт: `output: "export"` в `next.config.ts`. Картинки без серверного оптимизатора.
 
 - Разработка: `npm run dev` (порт 43217)
-- Выгрузка: `npm run build` → `out/` и `holding-deck-timeweb.zip`
+- Выгрузка локальная: `npm run build` → `out/`
+- Выгрузка на Timeweb рядом с уже существующим сайтом: `npm run build:timeweb` → архив с папкой `holding-architecture/` (корень сайта не затирать)
 - Просмотр сборки: `npm start`
 
 Не возвращать обязательный сервер Node.js, если задача — размещение на Timeweb как обычный сайт.

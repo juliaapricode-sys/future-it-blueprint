@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
+import { asset } from "@/lib/paths";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -47,14 +48,14 @@ export function DocsShell({
             <Button
               variant="outline"
               nativeButton={false}
-              render={<a href="/downloads/Holding-digital-architecture.pdf" />}
+              render={<a href={asset("/downloads/Holding-digital-architecture.pdf")} />}
             >
               PDF
             </Button>
             <Button
               variant="outline"
               nativeButton={false}
-              render={<a href="/downloads/Holding-digital-architecture.pptx" />}
+              render={<a href={asset("/downloads/Holding-digital-architecture.pptx")} />}
             >
               PPTX
             </Button>

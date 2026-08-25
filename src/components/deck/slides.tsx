@@ -8,6 +8,7 @@ import {
 } from "@/components/deck/SlideChrome";
 import { DataConstellation } from "@/components/diagrams/DataConstellation";
 import { ArchitectureStack } from "@/components/diagrams/TargetArchitecture";
+import { asset } from "@/lib/paths";
 import { cn } from "@/lib/utils";
 
 export function TitleSlide() {
@@ -61,7 +62,7 @@ export function AgendaSlide() {
           ))}
         </ol>
         <ScenePanel
-          src="/visuals/vis-mesh.webp"
+          src={asset("/visuals/vis-mesh.webp")}
           alt="Сеть площадок Холдинга как единый цифровой контур"
           caption="Холдинг как связанный контур, а не набор изолированных систем"
           className="min-h-[220px] lg:min-h-0"
@@ -136,7 +137,7 @@ export function RealitySlide() {
       </div>
       <figure className="scene-panel hud-corners relative min-h-0 flex-1 overflow-hidden rounded-3xl">
         <Image
-          src="/visuals/vis-gateway.webp"
+          src={asset("/visuals/vis-gateway.webp")}
           alt="Шлюз между технологическим контуром и цифровым двойником"
           fill
           sizes="100vw"
@@ -217,7 +218,7 @@ export function DomainsSlide() {
       </div>
       <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
         <ScenePanel
-          src="/visuals/vis-domains.webp"
+          src={asset("/visuals/vis-domains.webp")}
           alt="Семь компонентов архитектуры как световые столбы"
           caption="Семь контуров одной конструкции"
           className="hidden min-h-[240px] lg:block"
@@ -270,7 +271,7 @@ export function DataSlide() {
       <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
         <div className="grid min-h-0 gap-2">
           <ScenePanel
-            src="/visuals/vis-data-core.webp"
+            src={asset("/visuals/vis-data-core.webp")}
             alt="Корпоративное хранилище данных как ядро согласованных витрин"
             caption="Согласованная копия факта после шлюза"
             className="min-h-[140px] lg:min-h-0"
@@ -376,13 +377,13 @@ export function TrendsSlide() {
       <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
         <div className="grid min-h-0 gap-3">
           <ScenePanel
-            src="/visuals/vis-twin.webp"
+            src={asset("/visuals/vis-twin.webp")}
             alt="Цифровой двойник турбины в машинном зале"
             caption="Цифровой двойник — контур надёжности, не витрина"
             className="min-h-[160px] lg:min-h-0"
           />
           <ScenePanel
-            src="/visuals/vis-ai-portal.webp"
+            src={asset("/visuals/vis-ai-portal.webp")}
             alt="Маркетплейс сервисов искусственного интеллекта"
             caption="Сервисы искусственного интеллекта — только на подготовленных данных"
             className="hidden min-h-[120px] sm:block lg:min-h-0"
@@ -613,7 +614,7 @@ export function PrepareSlide() {
       </div>
       <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
         <ScenePanel
-          src="/visuals/vis-policy.webp"
+          src={asset("/visuals/vis-policy.webp")}
           alt="Стратегии и политики как архитектурный свод правил"
           caption="Свод правил. Не приложение к проекту"
           className="min-h-[180px] lg:min-h-0"
