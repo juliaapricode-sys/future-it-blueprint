@@ -21,46 +21,47 @@
 
 ## Как разместить на сервере Timeweb на отдельном порту
 
-Текущий сайт на портах 80 и 443 не трогаем. Доклад слушает **свой порт 43217** из отдельного каталога `/var/www/holding-architecture`.
+В панели облачного сервера **нет** раздела вроде «Файловый менеджер → public_html». Страница `https://timeweb.cloud/my/servers/8827591` — это настройки машины, а не папка сайта. Файлы кладут через **FileZilla (SFTP)** или вкладку **«Консоль»**.
 
-Нужна сборка **без** префикса пути: страница открывается как `http://IP:43217/`, а не `/holding-architecture/`.
+Текущий сайт на 80 и 443 не трогаем. Доклад будет на порту **43217**: `http://IP:43217/`.
 
-1. Соберите архив:
+### Куда смотреть в панели
 
-```bash
-npm run pack:port
-```
+1. Откройте [Облачные серверы](https://timeweb.cloud/my/servers) и сервер **8827591**.
+2. На вкладке **«Дашборд»** скопируйте **IP** (клик по адресу) и **пароль root**.
+3. Дальше файлы грузятся не в панели, а программой FileZilla на ваш компьютер.
 
-Появится `holding-architecture-port.zip` — внутри папка `holding-architecture/` с полной кинематографической страницей.
+### Как положить файлы (FileZilla)
 
-2. На сервере (консоль в панели Timeweb или SSH), **не** распаковывая в корень текущего сайта:
+1. Скачайте архив `holding-architecture-port.zip`. На компьютере распакуйте его: внутри должна быть папка `holding-architecture`, а в ней `index.html`.
+2. Установите [FileZilla](https://filezilla-project.org/). Вверху окна:
+   - протокол: **SFTP**;
+   - хост: IP с дашборда;
+   - пользователь: `root` (или пользователь панели, если стоит Fastpanel / ispmanager);
+   - пароль: с вкладки «Дашборд»;
+   - порт: **22**.
+   Нажмите «Быстрое соединение».
+3. Слева — файлы на вашем компьютере. Справа — сервер. Справа поднимитесь в корень `/`, откройте `var`, затем `www`.
+4. В `/var/www` создайте каталог `holding-architecture` (правая кнопка → «Создать каталог»). **Не** открывайте папку текущего сайта и **не** кладите файлы в `html` / `public_html`.
+5. Зайдите в созданный `holding-architecture`. Слева откройте распакованную папку так, чтобы были видны `index.html`, `_next`, `visuals`. Перетащите **содержимое** на правую сторону.
+
+Готово, когда справа в `/var/www/holding-architecture` лежит `index.html`.
+
+### Если удобнее вкладка «Консоль»
+
+На той же странице сервера: **«Консоль»** → логин `root` → пароль с «Дашборда» (`Ctrl+Shift+V`). Сначала всё равно загрузите zip по SFTP, например в `/root/holding-architecture-port.zip`, затем:
 
 ```bash
 sudo mkdir -p /var/www/holding-architecture
-sudo unzip -o holding-architecture-port.zip -d /tmp
+sudo unzip -o /root/holding-architecture-port.zip -d /tmp
 sudo rsync -a --delete /tmp/holding-architecture/ /var/www/holding-architecture/
 ```
 
-3. Добавьте отдельный сайт nginx (файл уже в репозитории: `deploy/nginx-holding-architecture-43217.conf`):
+### Nginx и порт
 
-```bash
-sudo cp deploy/nginx-holding-architecture-43217.conf /etc/nginx/sites-available/holding-architecture-43217.conf
-sudo ln -sfn /etc/nginx/sites-available/holding-architecture-43217.conf /etc/nginx/sites-enabled/holding-architecture-43217.conf
-sudo nginx -t && sudo systemctl reload nginx
-```
+Файл `deploy/nginx-holding-architecture-43217.conf` слушает только 43217. Его копируют в `/etc/nginx/sites-available/` и включают символической ссылкой в `sites-enabled`, затем `sudo nginx -t && sudo systemctl reload nginx`. Существующие сайты на 80 не редактируют.
 
-Конфигурация только `listen 43217`. Блоки существующего сайта не редактируются.
-
-4. Откройте порт:
-
-- на сервере: `sudo ufw allow 43217/tcp` (если включён ufw);
-- в панели Timeweb: [Сети → Firewall](https://timeweb.cloud/my/firewalls) — входящий TCP **43217**, если к серверу привязан разрешающий файрвол. Если файрвол не создан, панель его не фильтрует.
-
-5. Ссылка для коллег: `http://IP-сервера:43217/`
-
-Node.js на сервере не нужен: nginx отдаёт статику. Если nginx нет, поставьте его (`sudo apt install nginx`) — это не заменяет сайт на 80, пока вы не меняете его конфигурацию.
-
-Если есть SSH с этой машины: `TIMEWEB_HOST=IP npm run deploy:timeweb-port`.
+Порт 43217: `sudo ufw allow 43217/tcp` и при включённом файрволе Timeweb — [Сети → Firewall](https://timeweb.cloud/my/firewalls), входящий TCP 43217.
 
 ## Как запустить локально
 
