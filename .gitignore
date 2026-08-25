@@ -22,6 +22,11 @@ holding-deck-timeweb.zip
 holding-architecture-html.zip
 .tmp-html-zip/
 
+# Local transfer artifacts
+future-it-blueprint.bundle
+"Цифровая архитектура холдинга.pdf"
+"Цифровая архитектура холдинга.pptx"
+
 # Copied into html/ by npm run pack:html
 html/
 
