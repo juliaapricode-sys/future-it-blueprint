@@ -38,6 +38,8 @@ for (const name of [
   "styles.css",
   "deck.js",
   ".htaccess",
+  "favicon.svg",
+  "favicon.ico",
   "visuals",
   "downloads",
 ]) {
