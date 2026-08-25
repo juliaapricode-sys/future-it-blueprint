@@ -27,6 +27,9 @@ export default function ScriptPage() {
           <Button variant="outline" nativeButton={false} render={<Link href="/handout" />}>
             Памятка
           </Button>
+          <Button variant="outline" nativeButton={false} render={<Link href="/docs" />}>
+            Документация
+          </Button>
         </div>
 
         <ol className="mt-12 space-y-12">

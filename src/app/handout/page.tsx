@@ -29,6 +29,9 @@ export default function HandoutPage() {
           <Button variant="outline" nativeButton={false} render={<Link href="/script" />}>
             Полный текст
           </Button>
+          <Button variant="outline" nativeButton={false} render={<Link href="/docs" />}>
+            Документация
+          </Button>
         </div>
 
         <Separator className="my-10" />
