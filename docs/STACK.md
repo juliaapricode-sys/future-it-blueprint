@@ -33,8 +33,7 @@
 npm run dev            # разработка, порт 43217
 npm run build          # HTML в папке out/ (локальный просмотр с корня)
 npm start              # раздача out/ на порту 43217
-npm run pack:port      # архив для отдельного порта 43217 (без префикса пути)
-npm run pack:html      # архив в подкаталог /holding-architecture/ на уже существующем домене
+npm run build:pages    # статическая сборка для GitHub Pages
 ```
 
-На Timeweb Node.js не нужен. Для отдельного порта: `npm run pack:port` и nginx `listen 43217`. Для пути на уже существующем домене: `npm run pack:html`.
+Публичная ссылка: `https://juliaapricode-sys.github.io/future-it-blueprint/`. Timeweb не обязателен.

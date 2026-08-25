@@ -12,9 +12,24 @@ export default function DocsPage() {
     <DocsShell
       kicker="Документация проекта"
       title="Доклад, который можно показать по ссылке"
-      lead="Это 15-минутный доклад о цифровой архитектуре промышленного энергетического холдинга. Страница собрана так, чтобы её можно было загрузить на обычный хостинг Timeweb: без GitHub и без запуска Node.js на сервере."
+      lead="Доклад уже открывается по ссылке в интернете. FileZilla и сервер Timeweb для показа не нужны."
       active="/docs"
     >
+      <DocCard title="Ссылка для коллег">
+        <p>
+          <a
+            className="text-cyan underline-offset-4 hover:underline"
+            href="https://juliaapricode-sys.github.io/future-it-blueprint/"
+          >
+            https://juliaapricode-sys.github.io/future-it-blueprint/
+          </a>
+        </p>
+        <p>
+          Это готовая страница в интернете. Существующий сервер Timeweb не
+          изменяется.
+        </p>
+      </DocCard>
+
       <DocCard title="Что это">
         <p>
           Полноэкранные слайды, текст выпуска для корпоративного телевидения и
@@ -53,32 +68,16 @@ export default function DocsPage() {
         </ul>
       </DocCard>
 
-      <DocCard title="Как открыть коллегам с Timeweb">
-        <ol className="list-decimal space-y-2 pl-5">
-          <li>
-            Сборка на отдельный порт:{" "}
-            <code className="text-cyan">npm run pack:port</code>. Архив{" "}
-            <code className="text-cyan">holding-architecture-port.zip</code>.
-          </li>
-          <li>
-            На сервере распакуйте в{" "}
-            <code className="text-cyan">/var/www/holding-architecture</code>, не
-            в корень текущего сайта. Подключите nginx из{" "}
-            <code className="text-cyan">
-              deploy/nginx-holding-architecture-43217.conf
-            </code>{" "}
-            — он слушает только порт 43217.
-          </li>
-          <li>
-            Откройте TCP 43217 в файрволе панели Timeweb, если файрвол включён.
-            Ссылка:{" "}
-            <code className="text-cyan">http://IP-сервера:43217/</code>. Сайт на
-            портах 80 и 443 не изменяется.
-          </li>
-        </ol>
+      <DocCard title="Как открыть коллегам">
         <p>
-          Node.js на сервере не нужен. Подробности — в README, раздел про
-          отдельный порт.
+          Отправьте ссылку{" "}
+          <a
+            className="text-cyan underline-offset-4 hover:underline"
+            href="https://juliaapricode-sys.github.io/future-it-blueprint/"
+          >
+            https://juliaapricode-sys.github.io/future-it-blueprint/
+          </a>
+          . Сервер Timeweb для этого не нужен.
         </p>
       </DocCard>
 
